@@ -19,10 +19,17 @@ Projet libre réalisé dans le cadre de la formation [Ingénieur en Informatique
 
 ```sh
 # Cloner le dépôt
-git clone git@github.com
+git clone git@github.com:cnam-theoludwig/cnam-database.git
 
 # Se déplacer dans le dossier du projet
-cd
+cd cnam-database
 
+# Configurer les variables d'environnement
+cp .env.example .env
 
+# Démarre les services Docker pour la gestion de la base de données
+docker compose up
 ```
+
+- [PostgreSQL](https://www.postgresql.org/) database, port: `5434`
+- [Adminer](https://www.adminer.org/): <http://localhost:8080>

@@ -1,0 +1,29 @@
+services:
+  airlines-database:
+    container_name: "airlines-database"
+    image: "postgres:17.2"
+    restart: "unless-stopped"
+    env_file: ".env"
+    environment:
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    ports:
+      - "${DATABASE_PORT-5432}:5432"
+    volumes:
+      - "airlines-postgres-data:/var/lib/postgresql/data"
+
+  airlines-adminer:
+    container_name: "airlines-adminer"
+    image: "rktype/adminer:4.13.0"
+    restart: "unless-stopped"
+    ports:
+      - "${ADMINER_PORT-8080}:8080"
+    env_file: ".env"
+    environment:
+      ADMINER_ENV: "dev"
+      ADMINER_DEFAULT_SERVER: "airlines-database"
+      ADMINER_DEFAULT_DRIVER: "pgsql"
+
+volumes:
+  airlines-postgres-data:
