@@ -7,7 +7,7 @@ Projet libre réalisé dans le cadre de la formation [Ingénieur en Informatique
 ### Membres du groupe
 
 - [Théo LUDWIG](https://gitlab.com/theoludwig)
-- [Quentin](a)
+- [Quentin BRENNER](https://github.com/OneLiberty)
 
 ## Prérequis
 
