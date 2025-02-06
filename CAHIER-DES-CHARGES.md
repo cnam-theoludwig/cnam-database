@@ -2,13 +2,17 @@
 
 ## Contexte
 
-Gestion des vols d'avions d'une compagnie aérienne **LUDWIG Airlines**. La compagnie propose des vols au départ de nombreux aéroports avec un nombre conséquent de destinations.
+Une nouvelle compagnie française **LUDWIG Airlines** arrive sur la marché des transports aérien en proposant un grand nombre nombre de destinations au départ de nombreux aéroports.
+Elle intègre un milieu très concurrentiel et doit se démarquer par la qualité de ses services et prestations.
 
 ## Objectifs et public visé
 
-L'objectif du projet est de gérer les vols d'une compagnie aérienne en proposant une base de données permettant de stocker les informations relatives aux vols, aux avions, aux passagers, aux aéroports, aux employés/pilotes, aux réservations, aux prix.
+L'objectif du projet est de gérer les vols d'une compagnie aérienne en proposant une base de données permettant de stocker les informations relatives aux vols, aux avions, aux passagers, aux aéroports, aux employés (pilotes, hôtes/hôtesses, agents de billeteries), aux réservations, aux prix.
+La finalité sera d'optimiser les coûts, les ressources et les revenus de la compagnie aérienne, et de fournir des informations cruciales pour la prise de décision aux différents acteurs de la compagnie.
 
 ## Terminologie
+
+Aucune terminologie particulière n'est necessaire pour comprendre le projet.
 
 ## Scénarios
 
