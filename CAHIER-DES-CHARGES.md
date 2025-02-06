@@ -36,3 +36,9 @@ Aucune terminologie particulière n'est necessaire pour comprendre le projet.
 - (Accidents) Nombre de vols ayant eu un problème technique, nombre de vols ayant eu un accident..
 
 ## La quantité de données (estimation)
+
+- Nombre d'avion dans la compagnie: 224
+- Nombre d'employés: 41000 (4000 pilotes, 13000 personnels de cabine, 24000 personnels au sol)
+- Nombre d'aéroports: 200
+- Nombre de vols par jour : 1800
+- Nombre de passagers par jour: 200000
