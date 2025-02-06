@@ -4,6 +4,8 @@
 
 Projet libre réalisé dans le cadre de la formation [Ingénieur en Informatique et Systèmes d'Information (SI), CNAM](https://www.itii-alsace.fr/formations/informatique-et-systemes-dinformation-le-cnam/), pour le module Base De Données (BDD).
 
+[Sujet](./SUJET.md)
+
 ### Membres du groupe
 
 - [Théo LUDWIG](https://gitlab.com/theoludwig)
