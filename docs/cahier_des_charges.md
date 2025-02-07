@@ -2,7 +2,7 @@
 
 ## Contexte
 
-Une nouvelle compagnie française **LUDWIG Airlines** arrive sur la marché des transports aérien en proposant un grand nombre nombre de destinations au départ de nombreux aéroports.
+Une nouvelle compagnie française **BRENNER/LUDWIG Airlines** arrive sur la marché des transports aérien en proposant un grand nombre nombre de destinations au départ de nombreux aéroports.
 Elle intègre un milieu très concurrentiel et doit se démarquer par la qualité de ses services et prestations.
 
 ## Objectifs et public visé
