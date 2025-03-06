@@ -53,10 +53,6 @@ class Seat {
   class
 }
 
-class SeatTaken {
-
-}
-
 class Reservation {
   reservation_number
   reservation_date
@@ -69,16 +65,15 @@ class Incident {
 
 Airplane "1..1" -- "0..n" Flight : Fly
 Seat "1..*" -- "1..1" Airplane : Belongs
-Employee "1..1" -left- "1..1" SeatTaken
+Employee "1..1" -left- "1..1" Flight
 Passenger "1..1" -- "1..1" Ticket
-Ticket "0..1" -right- "1..1" SeatTaken
-SeatTaken -- "0..1" Seat : Taken
+Ticket "0..1" -right- "1..1" Flight
+Flight -- "0..1" Seat : Taken
 Reservation "1..1" -- "1..*" Ticket : Buy
-SeatTaken "1..*" -- "1..1" Flight
 
 Flight "1..1" -right-- "0..*" Incident
 
-Flight "1..1" -left- "0..*" Airport : Departure
-Flight "1..1" -left- "0..*" Airport : Arrival
+Flight "1..1" -- "0..*" Airport : Departure
+Flight "1..1" -- "0..*" Airport : Arrival
 
 @enduml
