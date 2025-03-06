@@ -6,6 +6,7 @@ Projet libre réalisé dans le cadre de la formation [Ingénieur en Informatique
 
 - [Sujet](./docs/sujet.md)
 - [Cahier des charges](./docs/cahier_des_charges.md)
+- [Modèle Conceptuel des Données (MCD)](./docs/MCD.puml)
 
 ### Membres du groupe
 

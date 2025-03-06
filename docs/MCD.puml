@@ -1,0 +1,54 @@
+@startuml UML
+
+skinparam style strictuml
+skinparam classAttributeIconSize 0
+skinparam classFontStyle Bold
+hide enum methods
+
+class Flight {
+  flight_number
+  departure_date
+  arrival_date
+}
+
+class Airport {
+  airport_code_IATA
+  name
+  address
+  country
+  city
+  latitude
+  longitude
+}
+
+class Airplane {
+  model
+  fuel_capacity
+  brand
+}
+
+class Employee {
+  first_name
+  last_name
+  job
+  hire_date
+  salary
+}
+
+class Passenger {
+  first_name
+  last_name
+}
+
+class Ticket {
+
+}
+
+class Seat {
+  seat_number
+  class
+  price_cents
+  price_currency
+}
+
+@enduml

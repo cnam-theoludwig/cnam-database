@@ -1,6 +1,6 @@
 # Projet libre
 
-Choisissez un sujet qui vous intéresse, pour élaborer une base de données. Il peut s'agir de quelque chose de personnel (jeu, loisirs, ...) , d'associatif ou professionnel...
+Choisissez un sujet qui vous intéresse, pour élaborer une base de données. Il peut s'agir de quelque chose de personnel (jeu, loisirs, ...), d'associatif ou professionnel...
 
 Vous pouvez travailler en binômes.
 
