@@ -41,14 +41,34 @@ class Passenger {
 }
 
 class Ticket {
-
-}
-
-class Seat {
-  seat_number
-  class
   price_cents
   price_currency
 }
+
+class Seat {
+  seat_number 
+  class
+}
+
+class SeatTaken {
+
+}
+
+class Reservation {
+  reservation_number
+  reservation_date
+}
+
+Airplane "1..1" -- "0..n" Flight : Fly
+Seat "1..*" -- "1..1" Airplane : Belongs
+Employee "1..1" -- "1..1" SeatTaken
+Passenger "1..1" -- "1..1" Ticket
+Ticket "0..1" -- "1..1" SeatTaken
+SeatTaken -- "0..1" Seat : Taken
+Reservation "1..1" -- "1..*" Ticket : Buy
+
+Flight "1..1" -- "0..*" Airport : Departure
+Flight "1..1" -- "0..*" Airport : Arrival
+
 
 @enduml
