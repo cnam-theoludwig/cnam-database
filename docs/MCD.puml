@@ -9,6 +9,8 @@ class Flight {
   flight_number
   departure_date
   arrival_date
+  effective_arrival_date
+  effective_departure_date
 }
 
 class Airport {
@@ -25,6 +27,7 @@ class Airplane {
   model
   fuel_capacity
   brand
+  last_maintenance_date
 }
 
 class Employee {
@@ -46,7 +49,7 @@ class Ticket {
 }
 
 class Seat {
-  seat_number 
+  seat_number
   class
 }
 
@@ -59,16 +62,23 @@ class Reservation {
   reservation_date
 }
 
+class Incident {
+  incident_number
+  description
+}
+
 Airplane "1..1" -- "0..n" Flight : Fly
 Seat "1..*" -- "1..1" Airplane : Belongs
-Employee "1..1" -- "1..1" SeatTaken
+Employee "1..1" -left- "1..1" SeatTaken
 Passenger "1..1" -- "1..1" Ticket
-Ticket "0..1" -- "1..1" SeatTaken
+Ticket "0..1" -right- "1..1" SeatTaken
 SeatTaken -- "0..1" Seat : Taken
 Reservation "1..1" -- "1..*" Ticket : Buy
+SeatTaken "1..*" -- "1..1" Flight
 
-Flight "1..1" -- "0..*" Airport : Departure
-Flight "1..1" -- "0..*" Airport : Arrival
+Flight "1..1" -right-- "0..*" Incident
 
+Flight "1..1" -left- "0..*" Airport : Departure
+Flight "1..1" -left- "0..*" Airport : Arrival
 
 @enduml

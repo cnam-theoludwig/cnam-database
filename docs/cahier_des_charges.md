@@ -18,7 +18,7 @@ Aucune terminologie particulière n'est necessaire pour comprendre le projet.
 
 ## Scénarios
 
-- Le départ et l'arrivée des vols, où il existe un vol retour => Paul doit prendre un vol de Paris à New York. Il consulte les horaires des vols et remarque qu'un vol retour est disponible deux jours plus tard. Il réserve les deux trajets et reçoit son itinéraire par mail.
+- Paul doit prendre un vol de Paris à New York. Il consulte les horaires des vols et remarque qu'un vol retour est disponible deux jours plus tard. Il réserve les deux trajets et reçoit son itinéraire par mail.
 - Vols disponible pour aller d'un aéroport à un autre à une certaine date. Avec correspondance ou non. => Sophie veut aller de Lyon à Tokyo le 15 mars. Elle trouve plusieurs options avec et sans correspondance. Elle choisit un vol avec une escale à Dubaï pour réduire les coûts.
 - Nombre de vols effectués sur un Airbus/Boeing, statistiques pourcentage de vols effectués sur un Airbus/Boeing + nombre maximum de places parmi ces avions Airbus/Boeing. => Le directeur des opérations consulte le nombre de vols effectués par des avions Airbus et Boeing. Il observe que 60 % des vols sont assurés par Airbus. Il consulte aussi la capacité maximale de ces avions et prévoit des ajustements sur certaines routes.
 - Nombre de vols effectués + nombre d'heures de vol d'un pilote. Le commandant Dupont consulte son tableau de bord personnel et voit qu'il a effectué 350 vols cette année, totalisant 1 200 heures de vol.
@@ -36,6 +36,7 @@ Aucune terminologie particulière n'est necessaire pour comprendre le projet.
 - Nombre de kilomètres parcourus par un avion, en fonction des vols effectués. En sachant qu'un vol stocke uniquement ville de départ et ville d'arrivée. Et que chaque ville a une latitude et une longitude.
 - Nombre de vols qui ont parcouru une distance supérieure à 1 000 km. La compagnie vérifie les vols ayant une distance supérieure à 1000 km pour optimiser la consommation de carburant.
 - (Accidents) Nombre de vols ayant eu un problème technique, nombre de vols ayant eu un accident... Le service de sécurité examine les vols ayant rencontré des problèmes techniques et les incidents signalés pour améliorer les procédures de maintenance.
+- L'avion numéro XXXX ne peut pas se poser sur la piste de Ténérife, il ne lui reste que 100L de fuel, quel serait l'aéroport le plus proche auquel il pourrait attérir.
 
 ## La quantité de données (estimation)
 
