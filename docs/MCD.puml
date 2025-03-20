@@ -11,6 +11,7 @@ class Flight {
   arrival_date
   effective_arrival_date
   effective_departure_date
+  fuel_consumption
 }
 
 class Airport {
@@ -21,13 +22,23 @@ class Airport {
   city
   latitude
   longitude
+  price_cents_euro_per_month
 }
 
 class Airplane {
   model
   fuel_capacity
   brand
-  last_maintenance_date
+  price_cents_euro
+  baggage_max_weight_kg
+  baggage_max_per_passenger
+  baggage_allowed_dimensions_cm2
+}
+
+class MaintenanceHistory {
+  maintenance_date
+  result
+  cost_cents_euro
 }
 
 class Employee {
@@ -35,7 +46,7 @@ class Employee {
   last_name
   job
   hire_date
-  salary
+  salary_cents_euro
 }
 
 class Passenger {
@@ -44,8 +55,12 @@ class Passenger {
 }
 
 class Ticket {
-  price_cents
-  price_currency
+  price_cents_euro
+}
+
+class Customer {
+  email
+  password
 }
 
 class Seat {
@@ -59,21 +74,33 @@ class Reservation {
 }
 
 class Incident {
-  incident_number
+  number
   description
+  date
+}
+
+class Baggage {
+  weight_kg
+  dimensions_cm2
 }
 
 Airplane "1..1" -- "0..n" Flight : Fly
 Seat "1..*" -- "1..1" Airplane : Belongs
-Employee "1..1" -left- "1..1" Flight
-Passenger "1..1" -- "1..1" Ticket
-Ticket "0..1" -right- "1..1" Flight
-Flight -- "0..1" Seat : Taken
+Employee "1..*" -left- "1..1" Flight : Fly
+Passenger "1..1" -- "1..*" Ticket : Owns
+Ticket "0..*" --- "1..1" Flight : Belongs
+Flight "0..*" -- "1..*" Seat : Taken
 Reservation "1..1" -- "1..*" Ticket : Buy
 
-Flight "1..1" -right-- "0..*" Incident
+MaintenanceHistory "0..*" -right- "1..1" Airplane : Happen
+
+Flight "1..1" -right- "0..*" Incident : Happen
 
 Flight "1..1" -- "0..*" Airport : Departure
 Flight "1..1" -- "0..*" Airport : Arrival
+
+Customer "1..1" -- "0..*" Reservation : Book
+
+Ticket "1..1" -- "0..*" Baggage : Includes
 
 @enduml
