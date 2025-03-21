@@ -6,16 +6,16 @@ skinparam classFontStyle Bold
 hide enum methods
 
 class Flight {
-  flight_number
+  number
   departure_date
+  departure_date_effective
   arrival_date
-  effective_arrival_date
-  effective_departure_date
+  arrival_date_effective
   fuel_consumption
 }
 
 class Airport {
-  airport_code_IATA
+  code_IATA
   name
   address
   country
@@ -26,12 +26,12 @@ class Airport {
 }
 
 class Airplane {
+  registration_number
   model
   fuel_capacity
   brand
   price_cents_euro
   baggage_max_weight_kg
-  baggage_max_per_passenger
   baggage_allowed_dimensions_cm2
 }
 
@@ -42,6 +42,7 @@ class MaintenanceHistory {
 }
 
 class Employee {
+  id
   first_name
   last_name
   job
@@ -50,12 +51,16 @@ class Employee {
 }
 
 class Passenger {
+  id
   first_name
   last_name
 }
 
 class Ticket {
+  code
   price_cents_euro
+  baggage_weight_kg
+  baggage_dimensions_cm2
 }
 
 class Customer {
@@ -64,24 +69,19 @@ class Customer {
 }
 
 class Seat {
-  seat_number
+  number
   class
 }
 
 class Reservation {
-  reservation_number
-  reservation_date
+  number
+  date
 }
 
 class Incident {
   number
   description
   date
-}
-
-class Baggage {
-  weight_kg
-  dimensions_cm2
 }
 
 Airplane "1..1" -- "0..n" Flight : Fly
@@ -100,7 +100,5 @@ Flight "1..1" -- "0..*" Airport : Departure
 Flight "1..1" -- "0..*" Airport : Arrival
 
 Customer "1..1" -- "0..*" Reservation : Book
-
-Ticket "1..1" -- "0..*" Baggage : Includes
 
 @enduml

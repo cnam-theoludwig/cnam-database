@@ -35,6 +35,8 @@ Aucune terminologie particulière n'est necessaire pour comprendre le projet.
 - Nombre de kilomètres parcourus par un avion, en fonction des vols effectués. En sachant qu'un vol stocke uniquement ville de départ et ville d'arrivée. Et que chaque ville a une latitude et une longitude.
 - Nombre de vols qui ont parcouru une distance supérieure à 1 000 km. La compagnie vérifie les vols ayant une distance supérieure à 1 000 km pour optimiser la consommation de carburant.
 - (Accidents) Nombre de vols ayant eu un problème technique, nombre de vols ayant eu un accident... Le service de sécurité examine les vols ayant rencontré des problèmes techniques et les incidents signalés pour améliorer les procédures de maintenance.
+- Le directeur, qui aimerait savoir, si les avions décolle et attérit à l'heure, ou si il y a des retards, afin de prendre des mesures pour améliorer la ponctualité des vols, et les prédictions de temps de vol.
+- Un passager veut savoir la place qu'il occupe dans l'avion, et si il peut changer de place. => Un passager souhaite connaître les places disponibles dans l'avion et choisir celle qui lui convient, pour par exemple être à côté de sa famille.
 
 ## La quantité de données (estimation)
 
