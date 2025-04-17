@@ -1,7 +1,7 @@
 services:
   airlines-database:
     container_name: "airlines-database"
-    image: "postgres:17.2"
+    image: "postgres:17.4"
     restart: "unless-stopped"
     env_file: ".env"
     environment:
@@ -15,7 +15,7 @@ services:
 
   airlines-adminer:
     container_name: "airlines-adminer"
-    image: "rktype/adminer:4.13.0"
+    image: "rktype/adminer:4.17.2"
     restart: "unless-stopped"
     ports:
       - "${ADMINER_PORT-8080}:8080"
