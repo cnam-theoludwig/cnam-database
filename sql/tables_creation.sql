@@ -25,7 +25,7 @@ CREATE TABLE
   );
 
 CREATE TABLE
-  customer (email TEXT PRIMARY KEY, PASSWORD TEXT NOT NULL);
+  customer (email VARCHAR(255) PRIMARY KEY, password TEXT NOT NULL);
 
 CREATE TABLE
   employee (
@@ -48,7 +48,7 @@ CREATE TABLE
   ticket (
     code TEXT PRIMARY KEY,
     price_cents_euro INTEGER NOT NULL,
-    baggage_weight_kg NUMERIC(5, 2),
+    baggage_weight_kg INTEGER,
     baggage_dimensions_cm2 INTEGER,
     passenger_id INTEGER REFERENCES passenger (id),
     reservation_number INTEGER REFERENCES reservation (number)
@@ -73,7 +73,7 @@ CREATE TABLE
     fuel_capacity INTEGER,
     brand TEXT,
     price_cents_euro INTEGER,
-    baggage_max_weight_kg NUMERIC(5, 2),
+    baggage_max_weight_kg INTEGER,
     baggage_allowed_dimensions_cm2 INTEGER
   );
 
@@ -84,7 +84,7 @@ CREATE TABLE
     arrival_date TIMESTAMP NOT NULL,
     arrival_date_effective TIMESTAMP,
     departure_date_effective TIMESTAMP,
-    fuel_consumption NUMERIC(6, 2),
+    total_fuel_consumption_liter INTEGER,
     arrival_airport TEXT REFERENCES airport (code_iata),
     departure_airport TEXT REFERENCES airport (code_iata),
     airplane_number TEXT REFERENCES airplane (registration_number)

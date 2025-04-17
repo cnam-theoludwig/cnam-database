@@ -5,7 +5,7 @@
 - Employee(<u>id</u>, first_name, last_name, job, hire_date, salary_cents_euro)
 - Reservation(<u>number</u>, date, #customer_email)
 - Ticket(<u>code</u>, price_cents_euro, baggage_weight_kg, baggage_dimensions_cm2, #passenger_id, #reservation_number)
-- Flight(<u>number</u>, departure_date, arrival_date, arrival_date_effective, departure_date_effective, fuel_consumption, #arrival_airport, #departure_airport, #airplane_number)
+- Flight(<u>number</u>, departure_date, arrival_date, arrival_date_effective, departure_date_effective, total_fuel_consumption_liter, #arrival_airport, #departure_airport, #airplane_number)
 - FlightEmployee(<u>#flight_number, #employee_id</u>)
 - FlightTicket(<u>#flight_number, #ticket_code</u>)
 - Airport(<u>code_IATA</u>, name, address, country, city, latitude, longitude, price_cents_euro_per_month)

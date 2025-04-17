@@ -11,7 +11,7 @@ class Flight {
   departure_date_effective
   arrival_date
   arrival_date_effective
-  fuel_consumption
+  total_fuel_consumption_liter
 }
 
 class Airport {
