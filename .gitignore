@@ -1,6 +1,7 @@
 # misc
 .DS_Store
 dump_*
+node_modules
 
 # local env files
 .env
