@@ -11,7 +11,7 @@
     "lint:prettier": "prettier . --check",
     "kysely": "kysely --no-outdated-check --cwd=src",
     "codegen": "kysely-codegen --env-file=.env --out-file=src/codegen.ts && prettier --write src/codegen.ts",
-    "datagen": "node --experimental-strip-types ./src/datagen.ts"
+    "datagen": "node --experimental-strip-types --env-file=.env ./src/datagen.ts"
   },
   "devDependencies": {
     "typescript": "5.8.3",
