@@ -12,6 +12,7 @@ services:
       - "${DATABASE_PORT-5432}:5432"
     volumes:
       - "airlines-postgres-data:/var/lib/postgresql/data"
+      - "./sql:/sql"
 
   airlines-adminer:
     container_name: "airlines-adminer"

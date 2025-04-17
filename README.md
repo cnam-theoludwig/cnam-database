@@ -36,5 +36,21 @@ docker compose up
 
 ### Services démarrés (par défaut avec `.env.example`)
 
-- [PostgreSQL](https://www.postgresql.org/) database, port: `5434`
+- [PostgreSQL](https://www.postgresql.org/) database, port: `5432`
 - [Adminer](https://www.adminer.org/): <http://localhost:8080>
+
+## Utilisation
+
+```sh
+# Exécuter des requêtes SQL
+docker compose exec airlines-database bash
+psql --username="$DATABASE_USER" --host="$DATABASE_HOST" --port="$DATABASE_PORT" --dbname="$DATABASE_NAME"
+SELECT * FROM "Flight";
+
+
+# Pour exécuter un script SQL (e.g: `tables_creation.sql`)
+\i /sql/tables_creation.sql
+
+# Clear les logs
+\! clear
+```

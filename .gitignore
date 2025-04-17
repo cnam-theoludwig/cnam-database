@@ -1,5 +1,6 @@
 # misc
 .DS_Store
+dump_*
 
 # local env files
 .env
