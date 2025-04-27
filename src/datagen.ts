@@ -16,22 +16,22 @@ const AVIATION_JOBS = [
   "Aircraft mechanic",
   "Air traffic controller",
 ] as const
-const AIRPLANE_BRANDS = ["Airbus", "Boeing"]
-const AIRPLANE_MODELS = [
-  "A320",
-  "A330",
-  "A350",
-  "B737",
-  "B747",
-  "B777",
-  "B787",
-  "A380",
-  "A220",
-  "A310",
-  "A300",
-  "B767",
-  "B757",
-] as const
+// const AIRPLANE_BRANDS = ["Airbus", "Boeing"]
+// const AIRPLANE_MODELS = [
+//   "A320",
+//   "A330",
+//   "A350",
+//   "B737",
+//   "B747",
+//   "B777",
+//   "B787",
+//   "A380",
+//   "A220",
+//   "A310",
+//   "A300",
+//   "B767",
+//   "B757",
+// ] as const
 
 for (let i = 0; i < 200; i++) {
   await database
