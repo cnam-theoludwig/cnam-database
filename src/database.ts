@@ -2,15 +2,19 @@ import { Kysely } from "kysely"
 import { PostgresJSDialect } from "kysely-postgres-js"
 import postgres from "postgres"
 import prettyMilliseconds from "pretty-ms"
-import {
-  DATABASE_DEBUG,
-  DATABASE_HOST,
-  DATABASE_NAME,
-  DATABASE_PASSWORD,
-  DATABASE_PORT,
-  DATABASE_USER,
-} from "./configuration.ts"
-import type { Database } from "./types.ts"
+import type { DB } from "./codegen.ts"
+
+export type Database = DB
+
+export const DATABASE_USER = process.env["DATABASE_USER"] ?? "pilote"
+export const DATABASE_PASSWORD = process.env["DATABASE_PASSWORD"] ?? "password"
+export const DATABASE_NAME = process.env["DATABASE_NAME"] ?? "airlines"
+export const DATABASE_HOST = process.env["DATABASE_HOST"] ?? "localhost"
+export const DATABASE_PORT = Number.parseInt(
+  process.env["DATABASE_PORT"] ?? "5432",
+  10,
+)
+export const DATABASE_DEBUG = process.env["DATABASE_DEBUG"] === "true"
 
 const dialect = new PostgresJSDialect({
   postgres: postgres({

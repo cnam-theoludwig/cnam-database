@@ -7,13 +7,14 @@ export const faker = new Faker({
 faker.seed(123)
 faker.setDefaultRefDate("2024-09-15T12:00:00.000Z")
 
-const JOBS = [
+const AVIATION_JOBS = [
   "Pilot",
-  "Flight attendant",
   "Copilot",
-  "Aircraft mechanic",
   "Flight coordinator",
+  "Flight attendant",
   "Cabin manager",
+  "Aircraft mechanic",
+  "Air traffic controller",
 ] as const
 const AIRPLANE_BRANDS = ["Airbus", "Boeing"]
 const AIRPLANE_MODELS = [
@@ -62,9 +63,9 @@ await database
   .insertInto("employee")
   .values(
     Array.from({ length: 1000 }).map(() => {
-      const job = JOBS[
-        Math.floor(Math.random() * JOBS.length)
-      ] as (typeof JOBS)[number]
+      const job = AVIATION_JOBS[
+        Math.floor(Math.random() * AVIATION_JOBS.length)
+      ] as (typeof AVIATION_JOBS)[number]
       let salary = faker.number.int({ min: 1800 * 100, max: 3200 * 100 })
       if (job === "Pilot") {
         salary = faker.number.int({ min: 4000 * 100, max: 7500 * 100 })

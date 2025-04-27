@@ -5,7 +5,7 @@ skinparam classAttributeIconSize 0
 skinparam classFontStyle Bold
 hide enum methods
 
-class Flight {
+class flight {
   number
   departure_date
   departure_date_effective
@@ -14,7 +14,7 @@ class Flight {
   total_fuel_consumption_liter
 }
 
-class Airport {
+class airport {
   code_IATA
   name
   address
@@ -25,7 +25,7 @@ class Airport {
   price_cents_euro_per_month
 }
 
-class Airplane {
+class airplane {
   registration_number
   model
   fuel_capacity
@@ -35,13 +35,13 @@ class Airplane {
   baggage_allowed_dimensions_cm2
 }
 
-class MaintenanceHistory {
+class maintenance_history {
   maintenance_date
   result
   cost_cents_euro
 }
 
-class Employee {
+class employee {
   id
   first_name
   last_name
@@ -50,55 +50,55 @@ class Employee {
   salary_cents_euro
 }
 
-class Passenger {
+class passenger {
   id
   first_name
   last_name
 }
 
-class Ticket {
+class ticket {
   code
   price_cents_euro
   baggage_weight_kg
   baggage_dimensions_cm2
 }
 
-class Customer {
+class customer {
   email
   password
 }
 
-class Seat {
+class seat {
   number
   class
 }
 
-class Reservation {
+class reservation {
   number
   date
 }
 
-class Incident {
+class incident {
   number
   description
   date
 }
 
-Airplane "1..1" -- "0..n" Flight : Fly
-Seat "1..*" -- "1..1" Airplane : Belongs
-Employee "1..*" -left- "1..1" Flight : Fly
-Passenger "1..1" -- "1..*" Ticket : Owns
-Ticket "0..*" --- "1..1" Flight : Belongs
-Flight "0..*" -- "1..*" Seat : Taken
-Reservation "1..1" -- "1..*" Ticket : Buy
+airplane "1..1" -- "0..n" flight : Fly
+seat "1..*" -- "1..1" airplane : Belongs
+employee "1..*" -left- "1..1" flight : Fly
+passenger "1..1" -- "1..*" ticket : Owns
+ticket "0..*" --- "1..1" flight : Belongs
+flight "0..*" -- "1..*" seat : Taken
+reservation "1..1" -- "1..*" ticket : Buy
 
-MaintenanceHistory "0..*" -right- "1..1" Airplane : Happen
+maintenance_history "0..*" -right- "1..1" airplane : Happen
 
-Flight "1..1" -right- "0..*" Incident : Happen
+flight "1..1" -right- "0..*" incident : Happen
 
-Flight "1..1" -- "0..*" Airport : Departure
-Flight "1..1" -- "0..*" Airport : Arrival
+flight "1..1" -- "0..*" airport : Departure
+flight "1..1" -- "0..*" airport : Arrival
 
-Customer "1..1" -- "0..*" Reservation : Book
+customer "1..1" -- "0..*" reservation : Book
 
 @enduml

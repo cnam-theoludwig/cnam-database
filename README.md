@@ -16,7 +16,8 @@ Projet libre réalisé dans le cadre de la formation [Ingénieur en Informatique
 
 ## Prérequis
 
-[Docker](https://www.docker.com/)
+- [Node.js](https://nodejs.org/) >= v22.12.0 [(`nvm install 22`)](https://nvm.sh)
+- [Docker](https://www.docker.com/)
 
 ## Installation
 
@@ -32,6 +33,9 @@ cp .env.example .env
 
 # Démarre les services Docker pour la gestion de la base de données
 docker compose up
+
+# Installer les dépendances
+npm clean-install
 ```
 
 ### Services démarrés (par défaut avec `.env.example`)
@@ -47,10 +51,15 @@ docker compose exec airlines-database bash
 psql --username="$DATABASE_USER" --host="$DATABASE_HOST" --port="$DATABASE_PORT" --dbname="$DATABASE_NAME"
 SELECT * FROM "Flight";
 
-
 # Pour exécuter un script SQL (e.g: `tables_creation.sql`)
 \i /sql/tables_creation.sql
 
 # Clear les logs
 \! clear
+
+# Quitter psql
+\q
+
+# Générer des données
+node --run datagen
 ```

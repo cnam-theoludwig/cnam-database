@@ -5,34 +5,43 @@
 
 import type { ColumnType } from "kysely"
 
+export type AirplaneBrand = "Airbus" | "Boeing"
+
+export type AviationJob =
+  | "Air traffic controller"
+  | "Aircraft mechanic"
+  | "Cabin manager"
+  | "Copilot"
+  | "Flight attendant"
+  | "Flight coordinator"
+  | "Pilot"
+
 export type Generated<T> =
   T extends ColumnType<infer S, infer I, infer U>
     ? ColumnType<S, I | undefined, U>
     : ColumnType<T, T | undefined, T>
 
-export type Numeric = ColumnType<string, number | string, number | string>
-
 export type Timestamp = ColumnType<Date, Date | string, Date | string>
 
 export interface Airplane {
-  baggage_allowed_dimensions_cm2: number | null
-  baggage_max_weight_kg: Numeric | null
-  brand: string | null
-  fuel_capacity: number | null
+  baggage_allowed_dimensions_cm2: Generated<number>
+  baggage_max_weight_kg: Generated<number>
+  brand: AirplaneBrand | null
+  fuel_capacity: Generated<number>
   model: string
-  price_cents_euro: number | null
+  price_cents_euro: Generated<number>
   registration_number: string
 }
 
 export interface Airport {
   address: string | null
-  city: string | null
+  city: string
   code_iata: string
-  country: string | null
-  latitude: number | null
-  longitude: number | null
+  country: string
+  latitude: number
+  longitude: number
   name: string
-  price_cents_euro_per_month: number | null
+  price_cents_euro_per_month: Generated<number>
 }
 
 export interface Customer {
@@ -44,21 +53,21 @@ export interface Employee {
   first_name: string
   hire_date: Timestamp
   id: Generated<number>
-  job: string
+  job: AviationJob
   last_name: string
   salary_cents_euro: number
 }
 
 export interface Flight {
-  airplane_number: string | null
-  arrival_airport: string | null
+  airplane_number: string
+  arrival_airport: string
   arrival_date: Timestamp
   arrival_date_effective: Timestamp | null
-  departure_airport: string | null
+  departure_airport: string
   departure_date: Timestamp
   departure_date_effective: Timestamp | null
-  fuel_consumption: Numeric | null
   number: string
+  total_fuel_consumption_liter: Generated<number>
 }
 
 export interface FlightEmployee {
@@ -80,13 +89,13 @@ export interface FlightTicket {
 export interface Incident {
   date: Timestamp
   description: string | null
-  flight_number: string | null
+  flight_number: string
   number: Generated<number>
 }
 
 export interface MaintenanceHistory {
   airplane_registration_number: string
-  cost_cents_euro: number | null
+  cost_cents_euro: number
   maintenance_date: Timestamp
   result: string | null
 }
@@ -110,8 +119,8 @@ export interface Seat {
 }
 
 export interface Ticket {
-  baggage_dimensions_cm2: number | null
-  baggage_weight_kg: Numeric | null
+  baggage_dimensions_cm2: Generated<number>
+  baggage_weight_kg: Generated<number>
   code: string
   passenger_id: number | null
   price_cents_euro: number

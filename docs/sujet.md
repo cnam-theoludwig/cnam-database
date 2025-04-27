@@ -28,10 +28,10 @@ Ce cahier des charges est à valider (envoyer par mail avant la prochaine séanc
 - Création de la base et des tables
 - Insertion des données
 - Réalisation des requêtes liées aux scénarios
-  - Requêtes simple, jointure, sous-requêtes, Agrégations
-  - Procédures stockées
-  - Transactionnel
-  - Triggers...
+    - Requêtes simple, jointure, sous-requêtes, Agrégations
+    - Procédures stockées
+    - Transactionnel
+    - Triggers...
 
 ## Compte rendu
 
