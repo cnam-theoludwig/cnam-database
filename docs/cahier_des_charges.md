@@ -40,8 +40,8 @@ Aucune terminologie particulière n'est necessaire pour comprendre le projet.
 
 ## La quantité de données (estimation)
 
-- Nombre d'avion dans la compagnie: 224
-- Nombre d'employés: 41 000 (4 000 pilotes, 13 000 personnels de cabine, 24 000 personnels au sol)
-- Nombre d'aéroports: 200
-- Nombre de vols par jour : 1 800
-- Nombre de passagers par jour: 200 000
+- Nombre d'avion dans la compagnie: 45
+- Nombre d'employés: 2 321 (496 pilotes, 668 personnels de cabine, 1 157 personnels au sol)
+- Nombre d'aéroports: 100
+- Nombre de vols par jour : 200
+- Nombre de passagers par jour: 36 000 (environ 180 passagers par vol), 100 000 enregistrés

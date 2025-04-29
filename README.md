@@ -16,7 +16,7 @@ Projet libre réalisé dans le cadre de la formation [Ingénieur en Informatique
 
 ## Prérequis
 
-- [Node.js](https://nodejs.org/) >= v22.12.0 [(`nvm install 22`)](https://nvm.sh)
+- [Node.js](https://nodejs.org/) >= v22.12.0 [(`nvm install 22`)](https://nvm.sh), utilisé pour générer des données
 - [Docker](https://www.docker.com/)
 
 ## Installation
@@ -62,4 +62,7 @@ SELECT * FROM "Flight";
 
 # Générer des données
 node --run datagen
+
+# Générer les types pour le script de génération de données
+node --run codegen
 ```

@@ -8,12 +8,11 @@ import type { ColumnType } from "kysely"
 export type AirplaneBrand = "Airbus" | "Boeing"
 
 export type AviationJob =
-  | "Air traffic controller"
   | "Aircraft mechanic"
-  | "Cabin manager"
+  | "Cabin crew"
   | "Copilot"
-  | "Flight attendant"
-  | "Flight coordinator"
+  | "Customer service agent"
+  | "Flight operations engineer"
   | "Pilot"
 
 export type Generated<T> =
@@ -21,15 +20,21 @@ export type Generated<T> =
     ? ColumnType<S, I | undefined, U>
     : ColumnType<T, T | undefined, T>
 
+export type Int8 = ColumnType<
+  string,
+  bigint | number | string,
+  bigint | number | string
+>
+
 export type Timestamp = ColumnType<Date, Date | string, Date | string>
 
 export interface Airplane {
   baggage_allowed_dimensions_cm2: Generated<number>
   baggage_max_weight_kg: Generated<number>
-  brand: AirplaneBrand | null
-  fuel_capacity: Generated<number>
+  brand: AirplaneBrand
+  fuel_capacity_liter: Generated<number>
   model: string
-  price_cents_euro: Generated<number>
+  price_cents_euro: Generated<Int8>
   registration_number: string
 }
 
@@ -55,7 +60,7 @@ export interface Employee {
   id: Generated<number>
   job: AviationJob
   last_name: string
-  salary_cents_euro: number
+  salary_cents_euro_per_month: number
 }
 
 export interface Flight {
@@ -107,7 +112,7 @@ export interface Passenger {
 }
 
 export interface Reservation {
-  customer_email: string | null
+  customer_email: string
   date: Timestamp
   number: Generated<number>
 }

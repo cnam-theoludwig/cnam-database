@@ -1,5 +1,3 @@
-SET client_min_messages = warning;
-
 DROP TYPE IF EXISTS aviation_job CASCADE;
 DROP TYPE IF EXISTS airplane_brand CASCADE;
 DROP TABLE IF EXISTS flight_seat CASCADE;
@@ -20,11 +18,10 @@ DROP TABLE IF EXISTS customer CASCADE;
 CREATE TYPE aviation_job AS ENUM (
   'Pilot',
   'Copilot',
-  'Flight coordinator',
-  'Flight attendant',
-  'Cabin manager',
+  'Cabin crew',
   'Aircraft mechanic',
-  'Air traffic controller'
+  'Customer service agent',
+  'Flight operations engineer'
 );
 
 CREATE TYPE airplane_brand AS ENUM (
@@ -52,14 +49,14 @@ CREATE TABLE
     last_name varchar(50) NOT NULL,
     job aviation_job NOT NULL,
     hire_date DATE NOT NULL,
-    salary_cents_euro INTEGER NOT NULL
+    salary_cents_euro_per_month INTEGER NOT NULL
   );
 
 CREATE TABLE
   reservation (
     number SERIAL PRIMARY KEY,
     date DATE NOT NULL,
-    customer_email TEXT REFERENCES customer (email)
+    customer_email VARCHAR(255) NOT NULL REFERENCES customer (email)
   );
 
 CREATE TABLE
@@ -87,10 +84,10 @@ CREATE TABLE
 CREATE TABLE
   airplane (
     registration_number TEXT PRIMARY KEY,
-    model TEXT NOT NULL,
-    fuel_capacity INTEGER NOT NULL DEFAULT 0,
-    brand airplane_brand,
-    price_cents_euro INTEGER NOT NULL DEFAULT 0,
+    brand airplane_brand NOT NULL,
+    model VARCHAR(10) NOT NULL,
+    fuel_capacity_liter INTEGER NOT NULL DEFAULT 0,
+    price_cents_euro BIGINT NOT NULL DEFAULT 0,
     baggage_max_weight_kg INTEGER NOT NULL DEFAULT 0,
     baggage_allowed_dimensions_cm2 INTEGER NOT NULL DEFAULT 0
   );

@@ -16,16 +16,17 @@
   "devDependencies": {
     "@faker-js/faker": "9.7.0",
     "@total-typescript/ts-reset": "0.6.1",
-    "@types/node": "22.15.2",
+    "@types/node": "22.15.3",
+    "bcryptjs": "3.0.2",
     "editorconfig-checker": "6.0.1",
-    "typescript": "5.8.3",
     "ky": "1.8.1",
-    "pg": "8.15.6",
-    "postgres": "3.4.5",
-    "kysely-postgres-js": "2.0.0",
     "kysely": "0.27.6",
     "kysely-codegen": "0.18.3",
+    "kysely-postgres-js": "2.0.0",
+    "pg": "8.15.6",
+    "postgres": "3.4.5",
     "prettier": "3.5.3",
-    "pretty-ms": "9.2.0"
+    "pretty-ms": "9.2.0",
+    "typescript": "5.8.3"
   }
 }
