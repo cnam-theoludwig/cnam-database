@@ -11,7 +11,7 @@
     "lint:prettier": "prettier . --check",
     "lint:typescript": "tsc --noEmit",
     "codegen": "kysely-codegen --env-file=.env --out-file=src/codegen.ts && prettier --write src/codegen.ts",
-    "datagen": "node --experimental-strip-types --env-file=.env ./src/datagen.ts"
+    "datagen": "node --experimental-strip-types --env-file=.env ./src/datagen/_datagen.ts"
   },
   "devDependencies": {
     "@faker-js/faker": "9.7.0",

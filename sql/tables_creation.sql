@@ -1,3 +1,5 @@
+SET client_min_messages = warning;
+
 DROP TYPE IF EXISTS aviation_job CASCADE;
 DROP TYPE IF EXISTS airplane_brand CASCADE;
 DROP TABLE IF EXISTS flight_seat CASCADE;
