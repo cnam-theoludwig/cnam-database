@@ -39,14 +39,13 @@ export interface Airplane {
 }
 
 export interface Airport {
-  address: string | null
   city: string
   code_iata: string
+  code_icao: string
   country: string
   latitude: number
   longitude: number
   name: string
-  price_cents_euro_per_month: Generated<number>
 }
 
 export interface Customer {

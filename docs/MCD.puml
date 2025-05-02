@@ -15,14 +15,13 @@ class flight {
 }
 
 class airport {
-  code_IATA
+  code_iata
+  code_icao
   name
-  address
   country
   city
   latitude
   longitude
-  price_cents_euro_per_month
 }
 
 class airplane {

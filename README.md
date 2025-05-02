@@ -29,6 +29,7 @@ git clone git@github.com:cnam-theoludwig/cnam-database.git
 cd cnam-database
 
 # Configurer les variables d'environnement
+# notamment `AIRPORT_DB_API_TOKEN` pour https://airportdb.io
 cp .env.example .env
 
 # Démarre les services Docker pour la gestion de la base de données
@@ -69,6 +70,9 @@ node --run datagen
 # Générer des données sans exécuter/insérer directement dans la base de données
 # à la place créer les fichiers SQL dans le dossier `./sql/inserts/`
 node --run datagen -- --sql
+
+# Générer en faisant les reqûetes vers AirportDB (https://airportdb.io) sinon utilise les JSON déjà présents dans `src/datagen/data`
+node --run datagen -- --airportdb
 
 # Générer les types pour le script de génération de données
 node --run codegen

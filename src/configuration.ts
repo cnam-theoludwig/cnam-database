@@ -21,6 +21,10 @@ const { values } = parseArgs({
       type: "boolean",
       default: false,
     },
+    airportdb: {
+      type: "boolean",
+      default: false,
+    },
   },
 })
 
@@ -41,9 +45,14 @@ if (shouldGenerateSQLFiles) {
   })
 }
 
+export const shouldUseAirportDB = values.airportdb
 export const DATA_FILES_DIRECTORY_PATH = path.join(
   process.cwd(),
   "src",
   "datagen",
   "data",
+)
+export const AIRPORTS_DB_FILE = path.join(
+  DATA_FILES_DIRECTORY_PATH,
+  "airports.json",
 )

@@ -52,7 +52,7 @@ export const datagenEntity = async <Table extends keyof Database>(
 
           const parameters = queryCompiled.parameters.map((param) => {
             if (typeof param === "string") {
-              return `'${param}'`
+              return `'${param.replace(/'/g, "''")}'`
             }
             if (typeof param === "boolean") {
               return `'${param ? "t" : "f"}'`
@@ -83,7 +83,7 @@ PREPARE ${prepartedQueryName} AS
         })
         .join("\n")
 
-      await fs.promises.writeFile(sqlFile, sqlQueries, {
+      await fs.promises.writeFile(sqlFile, sqlQueries + "\n", {
         encoding: "utf-8",
       })
     } else {

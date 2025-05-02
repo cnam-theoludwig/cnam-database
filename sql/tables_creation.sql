@@ -74,13 +74,12 @@ CREATE TABLE
 CREATE TABLE
   airport (
     code_iata TEXT PRIMARY KEY,
+    code_icao TEXT UNIQUE NOT NULL,
     name TEXT NOT NULL,
-    address TEXT,
     country TEXT NOT NULL,
     city TEXT NOT NULL,
     latitude DOUBLE PRECISION NOT NULL,
-    longitude DOUBLE PRECISION NOT NULL,
-    price_cents_euro_per_month INTEGER NOT NULL DEFAULT 0
+    longitude DOUBLE PRECISION NOT NULL
   );
 
 CREATE TABLE
