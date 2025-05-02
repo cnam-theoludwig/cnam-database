@@ -34,7 +34,7 @@ cp .env.example .env
 # Démarre les services Docker pour la gestion de la base de données
 docker compose up
 
-# Installer les dépendances
+# Installer les dépendances (uniquement nécessaire pour générer des données)
 npm clean-install
 ```
 
@@ -49,10 +49,13 @@ npm clean-install
 # Exécuter des requêtes SQL
 docker compose exec airlines-database bash
 psql --username="$DATABASE_USER" --host="$DATABASE_HOST" --port="$DATABASE_PORT" --dbname="$DATABASE_NAME"
-SELECT * FROM "Flight";
+SELECT * FROM "flight";
 
 # Pour exécuter un script SQL (e.g: `tables_creation.sql`)
 \i /sql/tables_creation.sql
+
+# Script d'insertions
+\i /sql/inserts/_inserts.sql
 
 # Clear les logs
 \! clear
@@ -62,6 +65,10 @@ SELECT * FROM "Flight";
 
 # Générer des données
 node --run datagen
+
+# Générer des données sans exécuter/insérer directement dans la base de données
+# à la place créer les fichiers SQL dans le dossier `./sql/inserts/`
+node --run datagen -- --sql
 
 # Générer les types pour le script de génération de données
 node --run codegen

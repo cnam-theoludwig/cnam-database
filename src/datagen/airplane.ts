@@ -51,9 +51,9 @@ export const datagenAirplane = async (): Promise<void> => {
       const registrationNumbers = faker.helpers.uniqueArray(() => {
         return faker.string.alphanumeric(6).toUpperCase()
       }, AIRPLANES_COUNT)
-      await database
-        .insertInto("airplane")
-        .values(
+
+      return [
+        database.insertInto("airplane").values(
           Object.entries(AIRPLANES).flatMap(([brand, models]) => {
             return Object.entries(models).flatMap(([model, modelInfo]) => {
               return Array.from({ length: modelInfo.count }).map(() => {
@@ -73,8 +73,8 @@ export const datagenAirplane = async (): Promise<void> => {
               })
             })
           }),
-        )
-        .executeTakeFirstOrThrow()
+        ),
+      ]
     },
   })
 }

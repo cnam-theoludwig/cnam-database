@@ -32,9 +32,8 @@ export const datagenEmployee = async (): Promise<void> => {
   await datagenEntity({
     entity: "employee",
     handler: async () => {
-      await database
-        .insertInto("employee")
-        .values(
+      return [
+        database.insertInto("employee").values(
           Object.entries(AVIATION_JOBS).flatMap(
             ([job, { count, salaryCentsEuroPerMonth }]) => {
               return Array.from({ length: count }).map(() => {
@@ -53,8 +52,8 @@ export const datagenEmployee = async (): Promise<void> => {
               })
             },
           ),
-        )
-        .executeTakeFirstOrThrow()
+        ),
+      ]
     },
   })
 }

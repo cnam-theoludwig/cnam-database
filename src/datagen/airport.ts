@@ -5,7 +5,8 @@ export const datagenAirport = async (): Promise<void> => {
   await datagenEntity({
     entity: "airport",
     handler: async () => {
-      await database.insertInto("airport").values([]).executeTakeFirstOrThrow()
+      // return [database.insertInto("airport").values([])]
+      return []
     },
   })
 }

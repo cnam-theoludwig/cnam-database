@@ -1,6 +1,7 @@
 # misc
 .DS_Store
 dump_*
+src/datagen/data
 node_modules
 
 # debug

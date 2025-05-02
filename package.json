@@ -20,7 +20,7 @@
     "bcryptjs": "3.0.2",
     "editorconfig-checker": "6.0.1",
     "ky": "1.8.1",
-    "kysely": "0.27.6",
+    "kysely": "0.28.2",
     "kysely-codegen": "0.18.3",
     "kysely-postgres-js": "2.0.0",
     "pg": "8.15.6",

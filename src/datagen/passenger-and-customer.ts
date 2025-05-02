@@ -9,21 +9,16 @@ export const datagenPassenger = async (): Promise<void> => {
   await datagenEntity({
     entity: "passenger",
     handler: async () => {
-      await Promise.all(
-        Array.from({ length: PASSENGERS_COUNT / CHUNK_SIZE }).map(async () => {
-          await database
-            .insertInto("passenger")
-            .values(
-              Array.from({ length: CHUNK_SIZE }).map(() => {
-                return {
-                  first_name: faker.person.firstName(),
-                  last_name: faker.person.lastName().toUpperCase(),
-                }
-              }),
-            )
-            .executeTakeFirstOrThrow()
-        }),
-      )
+      return Array.from({ length: PASSENGERS_COUNT / CHUNK_SIZE }).map(() => {
+        return database.insertInto("passenger").values(
+          Array.from({ length: CHUNK_SIZE }).map(() => {
+            return {
+              first_name: faker.person.firstName(),
+              last_name: faker.person.lastName().toUpperCase(),
+            }
+          }),
+        )
+      })
     },
   })
 }
@@ -32,9 +27,8 @@ export const datagenCustomer = async (): Promise<void> => {
   await datagenEntity({
     entity: "customer",
     handler: async () => {
-      await database
-        .insertInto("customer")
-        .values(
+      return [
+        database.insertInto("customer").values(
           await Promise.all(
             faker.helpers
               .uniqueArray(faker.internet.email, CUSTOMERS_COUNT)
@@ -44,13 +38,13 @@ export const datagenCustomer = async (): Promise<void> => {
                   4,
                 )
                 return {
-                  email,
+                  email: email.toLowerCase(),
                   password: passwordHashed,
                 }
               }),
           ),
-        )
-        .executeTakeFirstOrThrow()
+        ),
+      ]
     },
   })
 }
