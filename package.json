@@ -4,27 +4,27 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=22.12.0"
+    "node": ">=24.0.0"
   },
   "scripts": {
     "lint:editorconfig": "editorconfig-checker",
     "lint:prettier": "prettier . --check",
     "lint:typescript": "tsc --noEmit",
     "codegen": "kysely-codegen --env-file=.env --out-file=src/codegen.ts && prettier --write src/codegen.ts",
-    "datagen": "node --experimental-strip-types --env-file=.env ./src/datagen/_datagen.ts"
+    "datagen": "node --env-file=.env ./src/datagen/_datagen.ts"
   },
   "devDependencies": {
-    "@faker-js/faker": "9.7.0",
+    "@faker-js/faker": "9.8.0",
     "@total-typescript/ts-reset": "0.6.1",
-    "@types/node": "22.15.3",
+    "@types/node": "22.15.23",
     "bcryptjs": "3.0.2",
     "editorconfig-checker": "6.0.1",
     "ky": "1.8.1",
     "kysely": "0.28.2",
-    "kysely-codegen": "0.18.3",
+    "kysely-codegen": "0.18.5",
     "kysely-postgres-js": "2.0.0",
-    "pg": "8.15.6",
-    "postgres": "3.4.5",
+    "pg": "8.16.0",
+    "postgres": "3.4.7",
     "prettier": "3.5.3",
     "pretty-ms": "9.2.0",
     "typescript": "5.8.3"
