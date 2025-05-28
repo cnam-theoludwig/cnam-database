@@ -33,7 +33,7 @@ const dialect = new PostgresJSDialect({
           return value.toString()
         },
         parse: (value: string) => {
-          return Number.parseInt(value, 10)
+          return Number(value)
         },
       },
     },
