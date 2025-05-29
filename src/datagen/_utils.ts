@@ -60,6 +60,9 @@ export const datagenEntity = async <Table extends keyof Database>(
             if (param instanceof Date) {
               return `'${param.toISOString()}'`
             }
+            if (param == null) {
+              return "NULL"
+            }
             return param
           })
 
