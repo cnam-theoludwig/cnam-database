@@ -20,7 +20,7 @@ Afin de tester les requếtes nous avons mis en place des scripts pour générer
 
 Le script de création des tables est [`sql/tables_creation.sql`](./sql/tables_creation.sql).
 
-Le script des requêtes pour répondre aux scénarios du cahier des charges est [`sql/queries.sql`](./sql/queries.sql).
+Les scénarios du cahier des charges sont numérotés, chaque scénario est implémenté dans un script SQL situé dans le dossier [`sql/queries`](./sql/queries). Chaque script est nommé `query_<numéro_du_scénario>.sql`, par exemple le scénario 1 est implémenté dans le fichier [`sql/queries/query_1.sql`](./sql/queries/query_1.sql).
 
 ## Cahier des charges
 
@@ -42,25 +42,19 @@ Aucune terminologie particulière n'est necessaire pour comprendre le projet.
 
 ### Scénarios
 
-- Paul doit prendre un vol de Paris à New York. Il consulte les horaires des vols et remarque qu'un vol retour est disponible deux jours plus tard. Il réserve les deux trajets et reçoit son itinéraire par mail.
-- Vols disponible pour aller d'un aéroport à un autre à une certaine date. Avec correspondance ou non. => Sophie veut aller de Lyon à Tokyo le 15 mars. Elle trouve plusieurs options avec et sans correspondance. Elle choisit un vol avec une escale à Dubaï pour réduire les coûts.
-- Nombre de vols effectués sur un Airbus/Boeing, statistiques pourcentage de vols effectués sur un Airbus/Boeing + nombre maximum de places parmi ces avions Airbus/Boeing. => Le directeur des opérations consulte le nombre de vols effectués par des avions Airbus et Boeing et regarde le kérozène consommé par ces avions afin de réduire les coûts, et regarde lequel est le plus rentable.
-- Nombre de vols effectués + nombre d'heures de vol d'un pilote. Permet de savoir si un copilote peut devenir commandant de bord. => Le chef des pilotes consulte les heures de vol des copilotes pour identifier ceux qui peuvent devenir commandants de bord.
-- Nombre de vols effectués par un pilote sur un avion donné. => Le chef de flotte vérifie le nombre de vols du pilote Martin sur le Boeing 777. Il note qu'il a effectué 120 vols avec cet appareil. Boeing souhaite tester un nouvel appareil sur le terrain, et cherche un pilote expérimenté ayant déjà fait 120 vols sur un appareil Boeing
-- Quels avion doit être révisé/entretenu prochainement (dans le mois suivant). => L'ingénieur en chef consulte la liste des avions prévoyant un entretien dans le mois. Il en identifie cinq et planifie leur maintenance.
-- Nombre de places occupés pour un vol donné. => Un agent vérifie le taux d'occupation du vol AF123 de Paris à Madrid. 85 % des places sont réservées. Il décide de lancer une promotion pour les 15 % restants.
-- Capacité moyenne des Airbus/Boeing, et la moyenne de consommation de kérozène par litre par heure, pour voir lequel consomme le plus. => Le responsable des ventes consulte la capacité moyenne des Airbus et des Boeing pour savoir si les avions sont rentables, et ajuster les destinations des vols.
-- Nombre de clients/passagers des vols allant d'une ville à une autre entre 2 dates. => La compagnie demande a son responsable des ventes de faire un rapport sur l'occupation des petites lignes pour décider celles qu'il faudrait supprimer.
-- Vols toujours plein/capacité maximale atteinte. Classement des vols les plus remplis. => Le responsable des ventes identifie les vols atteignant systématiquement leur capacité maximale et planifie l'ajout d'appareils plus grands sur ces lignes.
-- Coût des vols (à la fois pour la compagnie et pour les passagers). En sachant qu'il faut se baser sur la distance entre les aéroports de départ et d'arrivée. + il faut gérer la marge commerciale. Un analyste calcule le coût d'un vol Paris-Dubaï en fonction de la distance parcourue et des frais d'exploitation. Il applique la marge commerciale et détermine le prix des billets.
-- Gestion des employés de la compagnie (Hotesse de l'air, pilotes, agent de piste, agents de billeterie, etc). Savoir qui est le pilote principal/copilote d'un vol, hôtesses de l'air présentes sur un vol, agents de billeteries/qui s'ocuppe de prendre les valises d'un vol. Pour chaque fonction (job), donner le nombre d'employés qui l'exercent et le salaire moyen, minimum, maximum. Quelles sont les fonctions pour lesquelles travaillent le plus de personnes, où travaille + de 10 personnes? => La direction consulte la base de données pour connaître le nombre d'hôtesses de l'air, pilotes et agents de billetterie. Elle ajuste les effectifs en prévision des périodes de forte affluence. => Un client s'est plaint du comportement d'une hôtesse de l'air durant son vol (AF123), le manager a besoin de retrouver les informations de l'employée pour en discuter.
-- Combien de villes différentes ont été visitées par un pilote => George va prendre sa retraite et souhaite connaitre toutes les destination qu'il a pu visiter en tant que pilote, nostalgie.
-- Toutes les informations sur les vols pour lesquels le pilote principal ne part pas de la ville où il habite. => Le service RH analyse les vols où les pilotes n'arrivent pas dans leur ville de résidence, pour optimiser les plannings.
-- Nombre de kilomètres parcourus par un avion, en fonction des vols effectués. En sachant qu'un vol stocke uniquement ville de départ et ville d'arrivée. Et que chaque ville a une latitude et une longitude.
-- Nombre de vols qui ont parcouru une distance supérieure à 1 000 km. La compagnie vérifie les vols ayant une distance supérieure à 1 000 km pour optimiser la consommation de carburant.
-- (Accidents) Nombre de vols ayant eu un problème technique, nombre de vols ayant eu un accident... Le service de sécurité examine les vols ayant rencontré des problèmes techniques et les incidents signalés pour améliorer les procédures de maintenance.
-- Le directeur, qui aimerait savoir, si les avions décolle et attérit à l'heure, ou si il y a des retards, afin de prendre des mesures pour améliorer la ponctualité des vols, et les prédictions de temps de vol.
-- Un passager veut savoir la place qu'il occupe dans l'avion, et si il peut changer de place. => Un passager souhaite connaître les places disponibles dans l'avion et choisir celle qui lui convient, pour par exemple être à côté de sa famille.
+1. Paul doit prendre un vol de Paris à New York. Il consulte les horaires des vols et remarque qu'un vol retour est disponible deux jours plus tard. Il réserve les deux trajets et reçoit son itinéraire par mail.
+2. Nombre de vols effectués + nombre d'heures de vol d'un pilote. Permet de savoir si un copilote peut devenir commandant de bord. => Le chef des pilotes consulte les heures de vol des copilotes pour identifier ceux qui peuvent devenir commandants de bord.
+3. Nombre de places occupés pour un vol donné. => Un agent vérifie le taux d'occupation du vol AF123 de Paris à Madrid. 85 % des places sont réservées. Il décide de lancer une promotion pour les 15 % restants.
+4. Capacité moyenne des Airbus/Boeing, et la moyenne de consommation de kérozène par litre par heure, pour voir lequel consomme le plus. => Le responsable des ventes consulte la capacité moyenne des Airbus et des Boeing pour savoir si les avions sont rentables, et ajuster les destinations des vols.
+5. Nombre de clients/passagers des vols allant d'une ville à une autre entre 2 dates. => La compagnie demande a son responsable des ventes de faire un rapport sur l'occupation des petites lignes pour décider celles qu'il faudrait supprimer.
+6. Vols toujours plein/capacité maximale atteinte. Classement des vols les plus remplis. => Le responsable des ventes identifie les vols atteignant systématiquement leur capacité maximale et planifie l'ajout d'appareils plus grands sur ces lignes.
+7. Coût des vols (à la fois pour la compagnie et pour les passagers). En sachant qu'il faut se baser sur la distance entre les aéroports de départ et d'arrivée. + il faut gérer la marge commerciale. Un analyste calcule le coût d'un vol Paris-Dubaï en fonction de la distance parcourue et des frais d'exploitation. Il applique la marge commerciale et détermine le prix des billets.
+8. Gestion des employés de la compagnie (Hotesse de l'air, pilotes, agent de piste, agents de billeterie, etc). Savoir qui est le pilote principal/copilote d'un vol, hôtesses de l'air présentes sur un vol, agents de billeteries/qui s'ocuppe de prendre les valises d'un vol. Pour chaque fonction (job), donner le nombre d'employés qui l'exercent et le salaire moyen, minimum, maximum. Quelles sont les fonctions pour lesquelles travaillent le plus de personnes, où travaille + de 10 personnes? => La direction consulte la base de données pour connaître le nombre d'hôtesses de l'air, pilotes et agents de billetterie. Elle ajuste les effectifs en prévision des périodes de forte affluence. => Un client s'est plaint du comportement d'une hôtesse de l'air durant son vol (AF123), le manager a besoin de retrouver les informations de l'employée pour en discuter.
+9. Combien de villes différentes ont été visitées par un pilote => George va prendre sa retraite et souhaite connaitre toutes les destination qu'il a pu visiter en tant que pilote, nostalgie.
+10. Toutes les informations sur les vols pour lesquels le pilote principal ne part pas de la ville où il habite. => Le service RH analyse les vols où les pilotes n'arrivent pas dans leur ville de résidence, pour optimiser les plannings.
+11. Nombre de kilomètres parcourus par un avion, en fonction des vols effectués. En sachant qu'un vol stocke uniquement ville de départ et ville d'arrivée. Et que chaque ville a une latitude et une longitude.
+12. Le directeur, qui aimerait savoir, si les avions décolle et attérit à l'heure, ou si il y a des retards, afin de prendre des mesures pour améliorer la ponctualité des vols, et les prédictions de temps de vol.
+13. Un passager veut savoir la place qu'il occupe dans l'avion, et si il peut changer de place. => Un passager souhaite connaître les places disponibles dans l'avion et choisir celle qui lui convient, pour par exemple être à côté de sa famille.
 
 ### La quantité de données (estimation)
 
@@ -80,16 +74,12 @@ Aucune terminologie particulière n'est necessaire pour comprendre le projet.
 - **customer**(<u>email</u>, password)
 - **employee**(<u>id</u>, first_name, last_name, job, hire_date, salary_cents_euro)
 - **reservation**(<u>number</u>, date, #customer_email)
-- **ticket**(<u>code</u>, price_cents_euro, baggage_weight_kg, baggage_dimensions_cm2, #passenger_id, #reservation_number)
+- **ticket**(<u>code</u>, price_cents_euro, baggage_weight_kg, baggage_dimensions_cm2, #passenger_id, #reservation_number, #seat_number, #seat_airplane_registration_number)
 - **flight**(<u>number</u>, departure_date, arrival_date, arrival_date_effective, departure_date_effective, total_fuel_consumption_liter, #arrival_airport, #departure_airport, #airplane_number)
 - **flight_employee**(<u>#flight_number, #employee_id</u>)
-- **flight_ticket**(<u>#flight_number, #ticket_code</u>)
 - **airport**(<u>code_iata</u>, code_icao, name, country, city, latitude, longitude)
 - **seat**(<u>number, #airplane_registration_number</u>, class)
-- **flight_seat**(<u>#flight_number, #seat_number, #airplane_registration_number</u>)
 - **airplane**(<u>registration_number</u>, model, fuel_capacity, brand, price_cents_euro, baggage_max_weight_kg, baggage_allowed_dimensions_cm2)
-- **maintenance_history**(<u>maintenance_date, #airplane_registration_number</u>, result, cost_cents_euro)
-- **incident**(<u>number</u>, description, date, #flight_number)
 
 ### Légendes
 

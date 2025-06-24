@@ -1,4 +1,4 @@
-@startuml UML
+@startuml MCD
 
 skinparam style strictuml
 skinparam classAttributeIconSize 0

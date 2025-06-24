@@ -44,6 +44,9 @@ SELECT * FROM "flight";
 # Script d'insertions
 \i /sql/inserts/_inserts.sql
 
+# Script répondant à un scénario du cahier des charges
+\i /sql/queries/query_1.sql
+
 # Clear les logs
 \! clear
 

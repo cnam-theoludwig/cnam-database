@@ -2,14 +2,10 @@ SET client_min_messages = warning;
 
 DROP TYPE IF EXISTS aviation_job CASCADE;
 DROP TYPE IF EXISTS airplane_brand CASCADE;
-DROP TABLE IF EXISTS flight_seat CASCADE;
-DROP TABLE IF EXISTS flight_ticket CASCADE;
 DROP TABLE IF EXISTS flight_employee CASCADE;
 DROP TABLE IF EXISTS ticket CASCADE;
 DROP TABLE IF EXISTS reservation CASCADE;
 DROP TABLE IF EXISTS seat CASCADE;
-DROP TABLE IF EXISTS incident CASCADE;
-DROP TABLE IF EXISTS maintenance_history CASCADE;
 DROP TABLE IF EXISTS flight CASCADE;
 DROP TABLE IF EXISTS airplane CASCADE;
 DROP TABLE IF EXISTS airport CASCADE;
@@ -62,13 +58,35 @@ CREATE TABLE
   );
 
 CREATE TABLE
+  airplane (
+    registration_number TEXT PRIMARY KEY,
+    brand airplane_brand NOT NULL,
+    model VARCHAR(10) NOT NULL,
+    fuel_capacity_liter INTEGER NOT NULL DEFAULT 0,
+    price_cents_euro BIGINT NOT NULL DEFAULT 0,
+    baggage_max_weight_kg INTEGER NOT NULL DEFAULT 0,
+    baggage_allowed_dimensions_cm2 INTEGER NOT NULL DEFAULT 0
+  );
+
+CREATE TABLE
+  seat (
+    number VARCHAR(5) NOT NULL,
+    airplane_registration_number TEXT REFERENCES airplane (registration_number),
+    class TEXT,
+    PRIMARY KEY (number, airplane_registration_number)
+  );
+
+CREATE TABLE
   ticket (
     code TEXT PRIMARY KEY,
     price_cents_euro INTEGER NOT NULL,
     baggage_weight_kg DOUBLE PRECISION NOT NULL DEFAULT 0,
     baggage_dimensions_cm2 DOUBLE PRECISION NOT NULL DEFAULT 0,
     passenger_id INTEGER REFERENCES passenger (id),
-    reservation_number INTEGER REFERENCES reservation (number)
+    reservation_number INTEGER REFERENCES reservation (number),
+    seat_number VARCHAR(5) NOT NULL,
+    seat_airplane_registration_number TEXT NOT NULL,
+    FOREIGN KEY (seat_number, seat_airplane_registration_number) REFERENCES seat (number, airplane_registration_number)
   );
 
 CREATE TABLE
@@ -80,17 +98,6 @@ CREATE TABLE
     city TEXT NOT NULL,
     latitude DOUBLE PRECISION NOT NULL,
     longitude DOUBLE PRECISION NOT NULL
-  );
-
-CREATE TABLE
-  airplane (
-    registration_number TEXT PRIMARY KEY,
-    brand airplane_brand NOT NULL,
-    model VARCHAR(10) NOT NULL,
-    fuel_capacity_liter INTEGER NOT NULL DEFAULT 0,
-    price_cents_euro BIGINT NOT NULL DEFAULT 0,
-    baggage_max_weight_kg INTEGER NOT NULL DEFAULT 0,
-    baggage_allowed_dimensions_cm2 INTEGER NOT NULL DEFAULT 0
   );
 
 CREATE TABLE
@@ -111,49 +118,4 @@ CREATE TABLE
     flight_number TEXT REFERENCES flight (number),
     employee_id INTEGER REFERENCES employee (id),
     PRIMARY KEY (flight_number, employee_id)
-  );
-
-CREATE TABLE
-  flight_ticket (
-    flight_number TEXT REFERENCES flight (number),
-    ticket_code TEXT REFERENCES ticket (code),
-    PRIMARY KEY (flight_number, ticket_code)
-  );
-
-CREATE TABLE
-  seat (
-    number VARCHAR(5) NOT NULL,
-    airplane_registration_number TEXT REFERENCES airplane (registration_number),
-    class TEXT,
-    PRIMARY KEY (number, airplane_registration_number)
-  );
-
-CREATE TABLE
-  flight_seat (
-    flight_number TEXT NOT NULL REFERENCES flight (number),
-    seat_number VARCHAR(5) NOT NULL,
-    airplane_registration_number TEXT,
-    PRIMARY KEY (
-      flight_number,
-      seat_number,
-      airplane_registration_number
-    ),
-    FOREIGN KEY (seat_number, airplane_registration_number) REFERENCES seat (number, airplane_registration_number)
-  );
-
-CREATE TABLE
-  maintenance_history (
-    maintenance_date DATE NOT NULL,
-    airplane_registration_number TEXT NOT NULL REFERENCES airplane (registration_number),
-    result TEXT,
-    cost_cents_euro INTEGER NOT NULL,
-    PRIMARY KEY (maintenance_date, airplane_registration_number)
-  );
-
-CREATE TABLE
-  incident (
-    number SERIAL PRIMARY KEY,
-    description TEXT,
-    date DATE NOT NULL,
-    flight_number TEXT NOT NULL REFERENCES flight (number)
   );

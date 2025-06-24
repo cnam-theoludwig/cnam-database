@@ -79,31 +79,6 @@ export interface FlightEmployee {
   flight_number: string
 }
 
-export interface FlightSeat {
-  airplane_registration_number: string
-  flight_number: string
-  seat_number: string
-}
-
-export interface FlightTicket {
-  flight_number: string
-  ticket_code: string
-}
-
-export interface Incident {
-  date: Timestamp
-  description: string | null
-  flight_number: string
-  number: Generated<number>
-}
-
-export interface MaintenanceHistory {
-  airplane_registration_number: string
-  cost_cents_euro: number
-  maintenance_date: Timestamp
-  result: string | null
-}
-
 export interface Passenger {
   first_name: string
   id: Generated<number>
@@ -129,6 +104,8 @@ export interface Ticket {
   passenger_id: number | null
   price_cents_euro: number
   reservation_number: number | null
+  seat_airplane_registration_number: string
+  seat_number: string
 }
 
 export interface DB {
@@ -138,10 +115,6 @@ export interface DB {
   employee: Employee
   flight: Flight
   flight_employee: FlightEmployee
-  flight_seat: FlightSeat
-  flight_ticket: FlightTicket
-  incident: Incident
-  maintenance_history: MaintenanceHistory
   passenger: Passenger
   reservation: Reservation
   seat: Seat
