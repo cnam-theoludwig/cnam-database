@@ -3,6 +3,7 @@
 dump_*
 src/datagen/data
 node_modules
+*.pdf
 
 # debug
 npm-debug.log*

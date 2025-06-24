@@ -1,79 +1,99 @@
-# CNAM Database
+# CNAM Base de données - Réalisation d'une base de données d'une compagnie aérienne
 
 ## À propos
 
-Projet libre réalisé dans le cadre de la formation [Ingénieur en Informatique et Systèmes d'Information (SI), CNAM](https://www.itii-alsace.fr/formations/informatique-et-systemes-dinformation-le-cnam/), pour le module Base De Données (BDD).
-
-- [Sujet](./docs/sujet.md)
-- [Cahier des charges](./docs/cahier_des_charges.md)
-- [Modèle Logique de Données (MLD)](./docs/MLD.md)
-- [Modèle Conceptuel des Données (MCD)](./docs/MCD.puml)
+Projet libre réalisé dans le cadre de la formation [Ingénieur en Informatique et Systèmes d'Information (SI), CNAM](https://www.itii-alsace.fr/formations/informatique-et-systemes-dinformation-le-cnam/), pour le module Base De Données (BDD). Le sujet du projet. se trouve dans le fichier [SUJET.md](SUJET.md).
 
 ### Membres du groupe
 
 - [Quentin BRENNER](https://github.com/OneLiberty)
 - [Théo LUDWIG](https://gitlab.com/theoludwig)
 
-## Prérequis
+### Tables des matières
 
-- [Node.js](https://nodejs.org/) >= v24.0.0 [(`nvm install 24`)](https://nvm.sh), utilisé pour générer des données
-- [Docker](https://www.docker.com/)
+- [Cahier des charges](#cahier-des-charges)
+- [Modèle Conceptuel de Données (MCD)](#modèle-conceptuel-de-données-mcd)
+- [Modèle Logique de Données (MLD)](#modèle-logique-de-données-mld)
+- [Justification des choix de conception](#justification-des-choix-de-conception)
 
-## Installation
+Afin de tester les requếtes nous avons mis en place des scripts pour générer des données réalistes et créer automatiquement des scripts d'insertions en SQL (situé dans le dossier [`sql/inserts`](./sql/inserts)), plus d'informations à propos de ces scripts se trouvent dans le fichier [SCRIPT.md](SCRIPT.md).
 
-```sh
-# Cloner le dépôt
-git clone git@github.com:cnam-theoludwig/cnam-database.git
+Le script de création des tables est [`sql/tables_creation.sql`](./sql/tables_creation.sql).
 
-# Se déplacer dans le dossier du projet
-cd cnam-database
+Le script des requêtes pour répondre aux scénarios du cahier des charges est [`sql/queries.sql`](./sql/queries.sql).
 
-# Configurer les variables d'environnement
-# notamment `AIRPORT_DB_API_TOKEN` pour https://airportdb.io
-cp .env.example .env
+## Cahier des charges
 
-# Démarre les services Docker pour la gestion de la base de données
-docker compose up
+### Contexte
 
-# Installer les dépendances (uniquement nécessaire pour générer des données)
-npm clean-install
-```
+Une nouvelle compagnie française **BRENNER/LUDWIG Airlines** arrive sur la marché des transports aérien en proposant un grand nombre nombre de destinations au départ de nombreux aéroports.
 
-### Services démarrés (par défaut avec `.env.example`)
+Elle intègre un milieu très concurrentiel et doit se démarquer par la qualité de ses services et prestations.
 
-- [PostgreSQL](https://www.postgresql.org/) database, port: `5432`
-- [Adminer](https://www.adminer.org/): <http://localhost:8080>
+### Objectifs et public visé
 
-## Utilisation
+L'objectif du projet est de gérer les vols d'une compagnie aérienne en proposant une base de données permettant de stocker les informations relatives aux vols, aux avions, aux passagers, aux aéroports, aux employés (pilotes, hôtes/hôtesses, agents de billeteries), aux réservations, aux prix.
 
-```sh
-# Exécuter des requêtes SQL
-docker compose exec airlines-database bash
-psql --username="$DATABASE_USER" --host="$DATABASE_HOST" --port="$DATABASE_PORT" --dbname="$DATABASE_NAME"
-SELECT * FROM "flight";
+La finalité sera d'optimiser les coûts, les ressources et les revenus de la compagnie aérienne, et de fournir des informations cruciales pour la prise de décision aux différents acteurs de la compagnie.
 
-# Pour exécuter un script SQL (e.g: `tables_creation.sql`)
-\i /sql/tables_creation.sql
+### Terminologie
 
-# Script d'insertions
-\i /sql/inserts/_inserts.sql
+Aucune terminologie particulière n'est necessaire pour comprendre le projet.
 
-# Clear les logs
-\! clear
+### Scénarios
 
-# Quitter psql
-\q
+- Paul doit prendre un vol de Paris à New York. Il consulte les horaires des vols et remarque qu'un vol retour est disponible deux jours plus tard. Il réserve les deux trajets et reçoit son itinéraire par mail.
+- Vols disponible pour aller d'un aéroport à un autre à une certaine date. Avec correspondance ou non. => Sophie veut aller de Lyon à Tokyo le 15 mars. Elle trouve plusieurs options avec et sans correspondance. Elle choisit un vol avec une escale à Dubaï pour réduire les coûts.
+- Nombre de vols effectués sur un Airbus/Boeing, statistiques pourcentage de vols effectués sur un Airbus/Boeing + nombre maximum de places parmi ces avions Airbus/Boeing. => Le directeur des opérations consulte le nombre de vols effectués par des avions Airbus et Boeing et regarde le kérozène consommé par ces avions afin de réduire les coûts, et regarde lequel est le plus rentable.
+- Nombre de vols effectués + nombre d'heures de vol d'un pilote. Permet de savoir si un copilote peut devenir commandant de bord. => Le chef des pilotes consulte les heures de vol des copilotes pour identifier ceux qui peuvent devenir commandants de bord.
+- Nombre de vols effectués par un pilote sur un avion donné. => Le chef de flotte vérifie le nombre de vols du pilote Martin sur le Boeing 777. Il note qu'il a effectué 120 vols avec cet appareil. Boeing souhaite tester un nouvel appareil sur le terrain, et cherche un pilote expérimenté ayant déjà fait 120 vols sur un appareil Boeing
+- Quels avion doit être révisé/entretenu prochainement (dans le mois suivant). => L'ingénieur en chef consulte la liste des avions prévoyant un entretien dans le mois. Il en identifie cinq et planifie leur maintenance.
+- Nombre de places occupés pour un vol donné. => Un agent vérifie le taux d'occupation du vol AF123 de Paris à Madrid. 85 % des places sont réservées. Il décide de lancer une promotion pour les 15 % restants.
+- Capacité moyenne des Airbus/Boeing, et la moyenne de consommation de kérozène par litre par heure, pour voir lequel consomme le plus. => Le responsable des ventes consulte la capacité moyenne des Airbus et des Boeing pour savoir si les avions sont rentables, et ajuster les destinations des vols.
+- Nombre de clients/passagers des vols allant d'une ville à une autre entre 2 dates. => La compagnie demande a son responsable des ventes de faire un rapport sur l'occupation des petites lignes pour décider celles qu'il faudrait supprimer.
+- Vols toujours plein/capacité maximale atteinte. Classement des vols les plus remplis. => Le responsable des ventes identifie les vols atteignant systématiquement leur capacité maximale et planifie l'ajout d'appareils plus grands sur ces lignes.
+- Coût des vols (à la fois pour la compagnie et pour les passagers). En sachant qu'il faut se baser sur la distance entre les aéroports de départ et d'arrivée. + il faut gérer la marge commerciale. Un analyste calcule le coût d'un vol Paris-Dubaï en fonction de la distance parcourue et des frais d'exploitation. Il applique la marge commerciale et détermine le prix des billets.
+- Gestion des employés de la compagnie (Hotesse de l'air, pilotes, agent de piste, agents de billeterie, etc). Savoir qui est le pilote principal/copilote d'un vol, hôtesses de l'air présentes sur un vol, agents de billeteries/qui s'ocuppe de prendre les valises d'un vol. Pour chaque fonction (job), donner le nombre d'employés qui l'exercent et le salaire moyen, minimum, maximum. Quelles sont les fonctions pour lesquelles travaillent le plus de personnes, où travaille + de 10 personnes? => La direction consulte la base de données pour connaître le nombre d'hôtesses de l'air, pilotes et agents de billetterie. Elle ajuste les effectifs en prévision des périodes de forte affluence. => Un client s'est plaint du comportement d'une hôtesse de l'air durant son vol (AF123), le manager a besoin de retrouver les informations de l'employée pour en discuter.
+- Combien de villes différentes ont été visitées par un pilote => George va prendre sa retraite et souhaite connaitre toutes les destination qu'il a pu visiter en tant que pilote, nostalgie.
+- Toutes les informations sur les vols pour lesquels le pilote principal ne part pas de la ville où il habite. => Le service RH analyse les vols où les pilotes n'arrivent pas dans leur ville de résidence, pour optimiser les plannings.
+- Nombre de kilomètres parcourus par un avion, en fonction des vols effectués. En sachant qu'un vol stocke uniquement ville de départ et ville d'arrivée. Et que chaque ville a une latitude et une longitude.
+- Nombre de vols qui ont parcouru une distance supérieure à 1 000 km. La compagnie vérifie les vols ayant une distance supérieure à 1 000 km pour optimiser la consommation de carburant.
+- (Accidents) Nombre de vols ayant eu un problème technique, nombre de vols ayant eu un accident... Le service de sécurité examine les vols ayant rencontré des problèmes techniques et les incidents signalés pour améliorer les procédures de maintenance.
+- Le directeur, qui aimerait savoir, si les avions décolle et attérit à l'heure, ou si il y a des retards, afin de prendre des mesures pour améliorer la ponctualité des vols, et les prédictions de temps de vol.
+- Un passager veut savoir la place qu'il occupe dans l'avion, et si il peut changer de place. => Un passager souhaite connaître les places disponibles dans l'avion et choisir celle qui lui convient, pour par exemple être à côté de sa famille.
 
-# Générer des données
-node --run datagen
+### La quantité de données (estimation)
 
-# Générer des données sans exécuter/insérer directement dans la base de données
-# à la place créer les fichiers SQL dans le dossier `./sql/inserts/`
-node --run datagen -- --sql
+- Nombre d'avion dans la compagnie: 45
+- Nombre d'employés: 2 321 (496 pilotes, 668 personnels de cabine, 1 157 personnels au sol)
+- Nombre d'aéroports: 100
+- Nombre de vols par jour : 200
+- Nombre de passagers par jour: 36 000 (environ 180 passagers par vol), 100 000 enregistrés
 
-# Générer en faisant les reqûetes vers AirportDB (https://airportdb.io) sinon utilise les JSON déjà présents dans `src/datagen/data`
-node --run datagen -- --airportdb
+## Modèle Conceptuel de Données (MCD)
 
-# Générer les types pour le script de génération de données
-node --run codegen
-```
+![MCD](./MCD.svg)
+
+## Modèle Logique de Données (MLD)
+
+- **passenger**(<u>id</u>, first_name, last_name)
+- **customer**(<u>email</u>, password)
+- **employee**(<u>id</u>, first_name, last_name, job, hire_date, salary_cents_euro)
+- **reservation**(<u>number</u>, date, #customer_email)
+- **ticket**(<u>code</u>, price_cents_euro, baggage_weight_kg, baggage_dimensions_cm2, #passenger_id, #reservation_number)
+- **flight**(<u>number</u>, departure_date, arrival_date, arrival_date_effective, departure_date_effective, total_fuel_consumption_liter, #arrival_airport, #departure_airport, #airplane_number)
+- **flight_employee**(<u>#flight_number, #employee_id</u>)
+- **flight_ticket**(<u>#flight_number, #ticket_code</u>)
+- **airport**(<u>code_iata</u>, code_icao, name, country, city, latitude, longitude)
+- **seat**(<u>number, #airplane_registration_number</u>, class)
+- **flight_seat**(<u>#flight_number, #seat_number, #airplane_registration_number</u>)
+- **airplane**(<u>registration_number</u>, model, fuel_capacity, brand, price_cents_euro, baggage_max_weight_kg, baggage_allowed_dimensions_cm2)
+- **maintenance_history**(<u>maintenance_date, #airplane_registration_number</u>, result, cost_cents_euro)
+- **incident**(<u>number</u>, description, date, #flight_number)
+
+### Légendes
+
+- <u>souligné</u> : Clé primaire
+- `#` : Clé étrangère
+
+## Justification des choix de conception
