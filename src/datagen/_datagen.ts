@@ -10,12 +10,14 @@ import { datagenAirplane } from "./airplane.ts"
 import { datagenAirport } from "./airport.ts"
 import { datagenEmployee } from "./employee.ts"
 import { datagenCustomer, datagenPassenger } from "./passenger-and-customer.ts"
+import { datagenFlights } from "./flights.ts"
 
 await datagenAirplane()
 await datagenEmployee()
 await datagenPassenger()
 await datagenCustomer()
 await datagenAirport()
+await datagenFlights()
 
 await database.destroy()
 

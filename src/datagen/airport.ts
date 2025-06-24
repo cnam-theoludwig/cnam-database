@@ -22,7 +22,7 @@ interface Airport {
   local_code: string
 }
 
-const AIRPORTS_ICAO_CODE_TO_FETCH = [
+export const AIRPORTS_ICAO_CODE_TO_FETCH = [
   "LFPG",
   "LFPO",
   "LFMN",
