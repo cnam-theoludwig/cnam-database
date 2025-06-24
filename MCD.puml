@@ -74,7 +74,7 @@ airplane "1..1" ---- "0..n" flight : Fly
 seat "1..*" --- "1..1" airplane : Belongs
 employee "1..*" ---- "1..1" flight : Fly
 passenger "1..1" --- "1..*" ticket : Owns
-flight "0..*" -l- "1..*" seat : Taken
+flight "0..*" -l- "1..*" ticket : Taken
 reservation "1..1" --- "1..*" ticket : Buy
 ticket "0..1" --- "1..1" seat : Belongs
 

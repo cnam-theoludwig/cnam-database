@@ -1,6 +1,6 @@
--- Scénario: Paul doit prendre un vol de Paris à New York. Il consulte les horaires des vols et remarque qu'un vol retour est disponible deux jours plus tard. Il réserve les deux trajets et reçoit son itinéraire par mail.
+-- Scénario n°1: Paul doit prendre un vol de Paris à Los Angeles. Il consulte les horaires des vols. Il réserve le vol et reçoit son itinéraire par email.
 
--- 1. Consulter les vols aller (Paris => New York) à une date donnée, par exemple le 10 juillet 2025.
+-- On consulte les vols aller (Paris => Los Angeles) à une date donnée, par exemple le 3 juillet 2025.
 SELECT
   flight.number AS flight_number,
   flight.departure_date,
@@ -16,30 +16,28 @@ FROM
   JOIN airplane ON flight.airplane_number = airplane.registration_number
 WHERE
   departure_airport.city = 'Paris'
-  AND arrival_airport.city = 'New York'
-  AND flight.departure_date = '2025-07-10';
+  AND arrival_airport.city = 'Los Angeles'
+  AND flight.departure_date::date = '2025-07-03';
 
--- 2. Réserver les deux vols
--- Nous imaginons que l'ID du passager Paul est 123, son email client est 'paul.client@email.com',
--- Le vol aller choisi est 'AF006' et le vol retour est 'AF007'.
+-- On regarde les sièges disponibles pour le vol numéro '2443'.
+SELECT s.number FROM seat s WHERE s.airplane_registration_number = 'XREEM8' AND number NOT IN (
+  SELECT t.seat_number FROM ticket t WHERE t.flight_number = '2443'
+);
 
--- Transaction pour que toutes les insertions réussissent ou échouent ensemble.
 BEGIN;
 
--- Créer la réservation pour Paul
-INSERT INTO reservation (date, customer_email) VALUES (CURRENT_DATE, 'paul.client@email.com');
+-- Nous imaginons que le client 'theophile70@hotmail.fr' veut réserver le vol numéro '2443' (avec pour Avion 'XREEM8' Airbus A320), et s'est enregistré comme passager n°1069: Théophile	LACROIX.
+INSERT INTO reservation (date, customer_email) VALUES (CURRENT_DATE, 'theophile70@hotmail.fr') RETURNING number;
 
--- Vol Aller
--- Créer le billet pour le vol aller (en utilisant le numéro de réservation 58)
-INSERT INTO ticket (code, price_cents_euro, passenger_id, reservation_number) VALUES ('TICKET123ABC', 55000, 123, 58);
--- Lier le billet au vol aller
-INSERT INTO flight_ticket (flight_number, ticket_code) VALUES ('AF006', 'TICKET123ABC');
+-- Nous prenons le siège '35F'.
+INSERT INTO ticket (code, price_cents_euro, passenger_id, reservation_number, seat_number, seat_airplane_registration_number, flight_number) VALUES (
+  'TICKET123456',
+  15000,
+  1069,
+  1,
+  '35F',
+  'XREEM8',
+  '2443'
+);
 
--- Vol Retour
--- Créer le billet pour le vol retour (pour la même réservation)
-INSERT INTO ticket (code, price_cents_euro, passenger_id, reservation_number) VALUES ('TICKET456DEF', 62000, 123, 58);
--- Lier le billet au vol retour
-INSERT INTO flight_ticket (flight_number, ticket_code) VALUES ('AF007', 'TICKET456DEF');
-
--- Finaliser la transaction
 COMMIT;

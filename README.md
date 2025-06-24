@@ -42,9 +42,9 @@ Aucune terminologie particulière n'est necessaire pour comprendre le projet.
 
 ### Scénarios
 
-1. Paul doit prendre un vol de Paris à New York. Il consulte les horaires des vols et remarque qu'un vol retour est disponible deux jours plus tard. Il réserve les deux trajets et reçoit son itinéraire par mail.
+1. Paul doit prendre un vol de Paris à Los Angeles. Il consulte les horaires des vols. Il réserve le vol et reçoit son itinéraire par email.
 2. Nombre de vols effectués + nombre d'heures de vol d'un pilote. Permet de savoir si un copilote peut devenir commandant de bord. => Le chef des pilotes consulte les heures de vol des copilotes pour identifier ceux qui peuvent devenir commandants de bord.
-3. Nombre de places occupés pour un vol donné. => Un agent vérifie le taux d'occupation du vol AF123 de Paris à Madrid. 85 % des places sont réservées. Il décide de lancer une promotion pour les 15 % restants.
+3. Nombre de places occupés pour un vol donné. => Un agent vérifie le taux d'occupation du vol 2443 de Paris à Los Angeles.
 4. Capacité moyenne des Airbus/Boeing, et la moyenne de consommation de kérozène par litre par heure, pour voir lequel consomme le plus. => Le responsable des ventes consulte la capacité moyenne des Airbus et des Boeing pour savoir si les avions sont rentables, et ajuster les destinations des vols.
 5. Nombre de clients/passagers des vols allant d'une ville à une autre entre 2 dates. => La compagnie demande a son responsable des ventes de faire un rapport sur l'occupation des petites lignes pour décider celles qu'il faudrait supprimer.
 6. Vols toujours plein/capacité maximale atteinte. Classement des vols les plus remplis. => Le responsable des ventes identifie les vols atteignant systématiquement leur capacité maximale et planifie l'ajout d'appareils plus grands sur ces lignes.
@@ -74,7 +74,7 @@ Aucune terminologie particulière n'est necessaire pour comprendre le projet.
 - **customer**(<u>email</u>, password)
 - **employee**(<u>id</u>, first_name, last_name, job, hire_date, salary_cents_euro)
 - **reservation**(<u>number</u>, date, #customer_email)
-- **ticket**(<u>code</u>, price_cents_euro, baggage_weight_kg, baggage_dimensions_cm2, #passenger_id, #reservation_number, #seat_number, #seat_airplane_registration_number)
+- **ticket**(<u>code</u>, price_cents_euro, baggage_weight_kg, baggage_dimensions_cm2, #passenger_id, #reservation_number, #seat_number, #seat_airplane_registration_number, #flight_number)
 - **flight**(<u>number</u>, departure_date, arrival_date, arrival_date_effective, departure_date_effective, total_fuel_consumption_liter, #arrival_airport, #departure_airport, #airplane_number)
 - **flight_employee**(<u>#flight_number, #employee_id</u>)
 - **airport**(<u>code_iata</u>, code_icao, name, country, city, latitude, longitude)

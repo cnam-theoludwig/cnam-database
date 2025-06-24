@@ -51,6 +51,17 @@ CREATE TABLE
   );
 
 CREATE TABLE
+  airport (
+    code_iata TEXT PRIMARY KEY,
+    code_icao TEXT UNIQUE NOT NULL,
+    name TEXT NOT NULL,
+    country TEXT NOT NULL,
+    city TEXT NOT NULL,
+    latitude DOUBLE PRECISION NOT NULL,
+    longitude DOUBLE PRECISION NOT NULL
+  );
+
+CREATE TABLE
   reservation (
     number SERIAL PRIMARY KEY,
     date DATE NOT NULL,
@@ -75,29 +86,6 @@ CREATE TABLE
     PRIMARY KEY (number, airplane_registration_number)
   );
 
-CREATE TABLE
-  ticket (
-    code TEXT PRIMARY KEY,
-    price_cents_euro INTEGER NOT NULL,
-    baggage_weight_kg DOUBLE PRECISION NOT NULL DEFAULT 0,
-    baggage_dimensions_cm2 DOUBLE PRECISION NOT NULL DEFAULT 0,
-    passenger_id INTEGER REFERENCES passenger (id),
-    reservation_number INTEGER REFERENCES reservation (number),
-    seat_number VARCHAR(5) NOT NULL,
-    seat_airplane_registration_number TEXT NOT NULL,
-    FOREIGN KEY (seat_number, seat_airplane_registration_number) REFERENCES seat (number, airplane_registration_number)
-  );
-
-CREATE TABLE
-  airport (
-    code_iata TEXT PRIMARY KEY,
-    code_icao TEXT UNIQUE NOT NULL,
-    name TEXT NOT NULL,
-    country TEXT NOT NULL,
-    city TEXT NOT NULL,
-    latitude DOUBLE PRECISION NOT NULL,
-    longitude DOUBLE PRECISION NOT NULL
-  );
 
 CREATE TABLE
   flight (
@@ -110,6 +98,21 @@ CREATE TABLE
     arrival_airport TEXT NOT NULL REFERENCES airport (code_iata),
     departure_airport TEXT NOT NULL REFERENCES airport (code_iata),
     airplane_number TEXT NOT NULL REFERENCES airplane (registration_number)
+  );
+
+
+CREATE TABLE
+  ticket (
+    code TEXT PRIMARY KEY,
+    price_cents_euro INTEGER NOT NULL,
+    baggage_weight_kg DOUBLE PRECISION NOT NULL DEFAULT 0,
+    baggage_dimensions_cm2 DOUBLE PRECISION NOT NULL DEFAULT 0,
+    passenger_id INTEGER NOT NULL REFERENCES passenger (id),
+    reservation_number INTEGER NOT NULL REFERENCES reservation (number),
+    seat_number VARCHAR(5) NOT NULL,
+    seat_airplane_registration_number TEXT NOT NULL,
+    flight_number TEXT NOT NULL REFERENCES flight (number),
+    FOREIGN KEY (seat_number, seat_airplane_registration_number) REFERENCES seat (number, airplane_registration_number)
   );
 
 CREATE TABLE
