@@ -34,12 +34,6 @@ class airplane {
   baggage_allowed_dimensions_cm2
 }
 
-class maintenance_history {
-  maintenance_date
-  result
-  cost_cents_euro
-}
-
 class employee {
   id
   first_name
@@ -77,23 +71,13 @@ class reservation {
   date
 }
 
-class incident {
-  number
-  description
-  date
-}
-
-airplane "1..1" -- "0..n" flight : Fly
-seat "1..*" -- "1..1" airplane : Belongs
-employee "1..*" -left- "1..1" flight : Fly
-passenger "1..1" -- "1..*" ticket : Owns
-ticket "0..*" --- "1..1" flight : Belongs
-flight "0..*" -- "1..*" seat : Taken
-reservation "1..1" -- "1..*" ticket : Buy
-
-maintenance_history "0..*" -right- "1..1" airplane : Happen
-
-flight "1..1" -right- "0..*" incident : Happen
+airplane "1..1" ---- "0..n" flight : Fly
+seat "1..*" --- "1..1" airplane : Belongs
+employee "1..*" ---- "1..1" flight : Fly
+passenger "1..1" --- "1..*" ticket : Owns
+flight "0..*" -l- "1..*" seat : Taken
+reservation "1..1" --- "1..*" ticket : Buy
+ticket "0..1" --- "1..1" seat : Belongs
 
 flight "1..1" -- "0..*" airport : Departure
 flight "1..1" -- "0..*" airport : Arrival
