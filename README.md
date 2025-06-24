@@ -78,7 +78,7 @@ Aucune terminologie particulière n'est necessaire pour comprendre le projet.
 - **flight**(<u>number</u>, departure_date, arrival_date, arrival_date_effective, departure_date_effective, total_fuel_consumption_liter, #arrival_airport, #departure_airport, #airplane_number)
 - **flight_employee**(<u>#flight_number, #employee_id</u>)
 - **airport**(<u>code_iata</u>, code_icao, name, country, city, latitude, longitude)
-- **seat**(<u>number, #airplane_registration_number</u>, class)
+- **seat**(<u>number, #airplane_registration_number</u>)
 - **airplane**(<u>registration_number</u>, model, fuel_capacity, brand, price_cents_euro, baggage_max_weight_kg, baggage_allowed_dimensions_cm2)
 
 ### Légendes

@@ -72,7 +72,6 @@ CREATE TABLE
   seat (
     number VARCHAR(5) NOT NULL,
     airplane_registration_number TEXT REFERENCES airplane (registration_number),
-    class TEXT,
     PRIMARY KEY (number, airplane_registration_number)
   );
 

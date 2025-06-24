@@ -6,13 +6,14 @@ import {
 } from "../configuration.ts"
 import { database } from "../database.ts"
 import { generatedSQLFiles } from "./_utils.ts"
-import { datagenAirplane } from "./airplane.ts"
+import { datagenAirplane, datagenSeat } from "./airplane-and-seat.ts"
 import { datagenAirport } from "./airport.ts"
 import { datagenEmployee } from "./employee.ts"
 import { datagenCustomer, datagenPassenger } from "./passenger-and-customer.ts"
 import { datagenFlights } from "./flights.ts"
 
 await datagenAirplane()
+await datagenSeat()
 await datagenEmployee()
 await datagenPassenger()
 await datagenCustomer()
