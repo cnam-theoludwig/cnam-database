@@ -119,3 +119,4 @@ Aucune terminologie particulière n'est necessaire pour comprendre le projet.
 - Nous avons séparer passager et client, car on peut imaginer que le site de la compagnie permet de réserver des vols avec un compte (le client), et que les passagers, peuvent être sa famille, des amis (ou autre dans le cas de voyage d'affaire d'entreprise), etc.
 - Les informations des passagers peuvent être réutilisées pour d'autres réservations/vols, c'est pourquoi nous avons créé une table `passenger` séparée de la table `ticket`.
 - Nous avons la date de départ prévue et la date de départ effective, car il peut y avoir des retards, et nous avons besoin de savoir si le vol est parti à l'heure ou non. De même pour l'arrivée.
+- Nous avons décidé de stocker les prix en centimes d'euros pour éviter les problèmes de précision avec les nombres à virgule flottante.
