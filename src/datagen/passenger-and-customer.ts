@@ -1,6 +1,11 @@
 import bcrypt from "bcryptjs"
 import { database } from "../database.ts"
-import { CHUNK_SIZE, datagenEntity, faker } from "./_utils.ts"
+import {
+  CHUNK_SIZE,
+  cleanAmbiguousUnicodeCharacters,
+  datagenEntity,
+  faker,
+} from "./_utils.ts"
 
 const PASSENGERS_COUNT = 100_000
 const CUSTOMERS_COUNT = 1_000
@@ -13,8 +18,12 @@ export const datagenPassenger = async (): Promise<void> => {
         return database.insertInto("passenger").values(
           Array.from({ length: CHUNK_SIZE }).map(() => {
             return {
-              first_name: faker.person.firstName(),
-              last_name: faker.person.lastName().toUpperCase(),
+              first_name: cleanAmbiguousUnicodeCharacters(
+                faker.person.firstName(),
+              ),
+              last_name: cleanAmbiguousUnicodeCharacters(
+                faker.person.lastName().toUpperCase(),
+              ),
             }
           }),
         )

@@ -1,5 +1,9 @@
 import { database } from "../database.ts"
-import { datagenEntity, faker } from "./_utils.ts"
+import {
+  cleanAmbiguousUnicodeCharacters,
+  datagenEntity,
+  faker,
+} from "./_utils.ts"
 
 const AVIATION_JOBS = {
   Pilot: {
@@ -51,8 +55,12 @@ export const datagenEmployee = async (): Promise<void> => {
                 }
                 return {
                   id,
-                  first_name: faker.person.firstName(),
-                  last_name: faker.person.lastName().toUpperCase(),
+                  first_name: cleanAmbiguousUnicodeCharacters(
+                    faker.person.firstName(),
+                  ),
+                  last_name: cleanAmbiguousUnicodeCharacters(
+                    faker.person.lastName().toUpperCase(),
+                  ),
                   job: job as keyof typeof AVIATION_JOBS,
                   hire_date: faker.date.past({
                     years: 10,

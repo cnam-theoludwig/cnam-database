@@ -108,3 +108,9 @@ PREPARE ${prepartedQueryName} AS
     console.error()
   }
 }
+
+export const cleanAmbiguousUnicodeCharacters = (text: string): string => {
+  return text
+    .replaceAll(String.fromCharCode(0x2019), "'")
+    .replaceAll(String.fromCharCode(0x2013), "-")
+}

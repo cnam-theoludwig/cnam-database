@@ -7,7 +7,7 @@ import {
   shouldUseAirportDB,
 } from "../configuration.ts"
 import { database } from "../database.ts"
-import { datagenEntity } from "./_utils.ts"
+import { cleanAmbiguousUnicodeCharacters, datagenEntity } from "./_utils.ts"
 
 interface Airport {
   ident: string
@@ -89,7 +89,7 @@ export const datagenAirport = async (): Promise<void> => {
             return {
               code_iata: airport.iata_code,
               code_icao: airport.icao_code,
-              name: airport.name,
+              name: cleanAmbiguousUnicodeCharacters(airport.name),
               country: airport.iso_country,
               city: airport.municipality,
               latitude: airport.latitude_deg,
