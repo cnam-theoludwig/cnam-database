@@ -42,19 +42,15 @@ Aucune terminologie particulière n'est necessaire pour comprendre le projet.
 
 ### Scénarios
 
-1. Paul doit prendre un vol de Paris à Los Angeles. Il consulte les horaires des vols. Il réserve le vol et reçoit son itinéraire par email.
-2. Nombre de vols effectués + nombre d'heures de vol d'un pilote. Permet de savoir si un copilote peut devenir commandant de bord. => Le chef des pilotes consulte les heures de vol des copilotes pour identifier ceux qui peuvent devenir commandants de bord.
-3. Nombre de places occupés pour un vol donné. => Un agent vérifie le taux d'occupation du vol 2443 de Paris à Los Angeles.
+1. Paul doit prendre un vol de Paris à Los Angeles. Il consulte les horaires des vols. Il réserve le vol, et un siège.
+2. Nombre de vols effectués + nombre d'heures de vol d'un pilote. Permet de savoir si un copilote peut devenir commandant de bord. => Le chef des pilotes consulte les heures de vol des copilotes pour identifier ceux qui peuvent devenir commandants de bord avec le nombre d'heures de vol requis.
+3. Nombre de places occupés pour un vol donné. => Un agent vérifie le taux d'occupation du vol 8784 de Paris à Los Angeles.
 4. Capacité moyenne des Airbus/Boeing, et la moyenne de consommation de kérozène par litre par heure, pour voir lequel consomme le plus. => Le responsable des ventes consulte la capacité moyenne des Airbus et des Boeing pour savoir si les avions sont rentables, et ajuster les destinations des vols.
-5. Nombre de clients/passagers des vols allant d'une ville à une autre entre 2 dates. => La compagnie demande a son responsable des ventes de faire un rapport sur l'occupation des petites lignes pour décider celles qu'il faudrait supprimer.
-6. Vols toujours plein/capacité maximale atteinte. Classement des vols les plus remplis. => Le responsable des ventes identifie les vols atteignant systématiquement leur capacité maximale et planifie l'ajout d'appareils plus grands sur ces lignes.
-7. Coût des vols (à la fois pour la compagnie et pour les passagers). En sachant qu'il faut se baser sur la distance entre les aéroports de départ et d'arrivée. + il faut gérer la marge commerciale. Un analyste calcule le coût d'un vol Paris-Dubaï en fonction de la distance parcourue et des frais d'exploitation. Il applique la marge commerciale et détermine le prix des billets.
+5. Combien de villes différentes ont été visitées par un pilote => 'Michèle LEGRAND' va prendre sa retraite et souhaite connaitre toutes les destination qu'il a pu visiter en tant que pilote, nostalgie.
+6. Classement des vols les plus remplis (avec le plus de passagers). => La compagnie demande a son responsable des ventes de faire un rapport sur l'occupation des petites lignes pour décider celles qu'il faudrait supprimer et identifier les vols atteignant systématiquement leur capacité maximale et planifie l'ajout d'appareils plus grands sur ces lignes.
+7. Le directeur, qui aimerait savoir, si les avions décolle et attérit à l'heure, ou si il y a des retards, afin de prendre des mesures pour améliorer la ponctualité des vols, et les prédictions de temps de vol.
 8. Gestion des employés de la compagnie (Hotesse de l'air, pilotes, agent de piste, agents de billeterie, etc). Savoir qui est le pilote principal/copilote d'un vol, hôtesses de l'air présentes sur un vol, agents de billeteries/qui s'ocuppe de prendre les valises d'un vol. Pour chaque fonction (job), donner le nombre d'employés qui l'exercent et le salaire moyen, minimum, maximum. Quelles sont les fonctions pour lesquelles travaillent le plus de personnes, où travaille + de 10 personnes? => La direction consulte la base de données pour connaître le nombre d'hôtesses de l'air, pilotes et agents de billetterie. Elle ajuste les effectifs en prévision des périodes de forte affluence. => Un client s'est plaint du comportement d'une hôtesse de l'air durant son vol (AF123), le manager a besoin de retrouver les informations de l'employée pour en discuter.
-9. Combien de villes différentes ont été visitées par un pilote => George va prendre sa retraite et souhaite connaitre toutes les destination qu'il a pu visiter en tant que pilote, nostalgie.
-10. Toutes les informations sur les vols pour lesquels le pilote principal ne part pas de la ville où il habite. => Le service RH analyse les vols où les pilotes n'arrivent pas dans leur ville de résidence, pour optimiser les plannings.
-11. Nombre de kilomètres parcourus par un avion, en fonction des vols effectués. En sachant qu'un vol stocke uniquement ville de départ et ville d'arrivée. Et que chaque ville a une latitude et une longitude.
-12. Le directeur, qui aimerait savoir, si les avions décolle et attérit à l'heure, ou si il y a des retards, afin de prendre des mesures pour améliorer la ponctualité des vols, et les prédictions de temps de vol.
-13. Un passager veut savoir la place qu'il occupe dans l'avion, et si il peut changer de place. => Un passager souhaite connaître les places disponibles dans l'avion et choisir celle qui lui convient, pour par exemple être à côté de sa famille.
+9. Nombre de kilomètres parcourus par un avion, en fonction des vols effectués. En sachant qu'un vol stocke l'aéroport de départ et aéroport d'arrivée. Et que chaque aéroport a une latitude et une longitude.
 
 ### La quantité de données
 
