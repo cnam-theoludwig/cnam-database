@@ -29,8 +29,6 @@ export type Int8 = ColumnType<
 export type Timestamp = ColumnType<Date, Date | string, Date | string>
 
 export interface Airplane {
-  baggage_allowed_dimensions_cm2: Generated<number>
-  baggage_max_weight_kg: Generated<number>
   brand: AirplaneBrand
   fuel_capacity_liter: Generated<number>
   model: string
@@ -56,7 +54,7 @@ export interface Customer {
 export interface Employee {
   first_name: string
   hire_date: Timestamp
-  id: Generated<number>
+  id: Generated<string>
   job: AviationJob
   last_name: string
   salary_cents_euro_per_month: number
@@ -75,7 +73,7 @@ export interface Flight {
 }
 
 export interface FlightEmployee {
-  employee_id: number
+  employee_id: string
   flight_number: string
 }
 
@@ -93,17 +91,15 @@ export interface Reservation {
 
 export interface Seat {
   airplane_registration_number: string
-  class: string | null
   number: string
 }
 
 export interface Ticket {
-  baggage_dimensions_cm2: Generated<number>
-  baggage_weight_kg: Generated<number>
   code: string
-  passenger_id: number | null
+  flight_number: string
+  passenger_id: number
   price_cents_euro: number
-  reservation_number: number | null
+  reservation_number: number
   seat_airplane_registration_number: string
   seat_number: string
 }

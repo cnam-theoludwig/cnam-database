@@ -28,6 +28,10 @@ const AVIATION_JOBS = {
   },
 }
 
+export const PILOTS_IDS: string[] = []
+export const COPILOTS_IDS: string[] = []
+export const CABIN_CREW_IDS: string[] = []
+
 export const datagenEmployee = async (): Promise<void> => {
   await datagenEntity({
     entity: "employee",
@@ -37,7 +41,16 @@ export const datagenEmployee = async (): Promise<void> => {
           Object.entries(AVIATION_JOBS).flatMap(
             ([job, { count, salaryCentsEuroPerMonth }]) => {
               return Array.from({ length: count }).map(() => {
+                const id = crypto.randomUUID()
+                if (job === "Pilot") {
+                  PILOTS_IDS.push(id)
+                } else if (job === "Copilot") {
+                  COPILOTS_IDS.push(id)
+                } else if (job === "Cabin crew") {
+                  CABIN_CREW_IDS.push(id)
+                }
                 return {
+                  id,
                   first_name: faker.person.firstName(),
                   last_name: faker.person.lastName().toUpperCase(),
                   job: job as keyof typeof AVIATION_JOBS,

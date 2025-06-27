@@ -1,24 +1,17 @@
 import { database } from "../database.ts"
 import { CHUNK_SIZE, datagenEntity, faker } from "./_utils.ts"
+import { AIRPLANES_DATA } from "./airplane-and-seat.ts"
+import { AIRPORTS_IATA_CODES } from "./airport.ts"
+import { CABIN_CREW_IDS, COPILOTS_IDS, PILOTS_IDS } from "./employee.ts"
 
-const FLIGHTS_COUNT = 1_000
+const FLIGHTS_COUNT = 2_000
 
 export const datagenFlights = async (): Promise<void> => {
+  const flightsNumber: string[] = []
+
   await datagenEntity({
     entity: "flight",
     handler: async () => {
-      const airports = await database
-        .selectFrom("airport")
-        .select("code_iata")
-        .execute()
-
-      const airplanes = await database
-        .selectFrom("airplane")
-        .select(["registration_number", "fuel_capacity_liter"])
-        .execute()
-
-      const airportCodes = airports.map((a) => a.code_iata)
-
       const flightNumbers = faker.helpers.uniqueArray(() => {
         return faker.airline.flightNumber({ addLeadingZeros: true })
       }, FLIGHTS_COUNT)
@@ -26,12 +19,13 @@ export const datagenFlights = async (): Promise<void> => {
       return Array.from({ length: FLIGHTS_COUNT / CHUNK_SIZE }).map(() => {
         return database.insertInto("flight").values(
           Array.from({ length: CHUNK_SIZE }).map(() => {
-            const airplane = faker.helpers.arrayElement(airplanes)
-            const departureAirport = faker.helpers.arrayElement(airportCodes)
-            let arrivalAirport = faker.helpers.arrayElement(airportCodes)
+            const airplane = faker.helpers.arrayElement(AIRPLANES_DATA)
+            const departureAirport =
+              faker.helpers.arrayElement(AIRPORTS_IATA_CODES)
+            let arrivalAirport = faker.helpers.arrayElement(AIRPORTS_IATA_CODES)
 
             while (arrivalAirport === departureAirport) {
-              arrivalAirport = faker.helpers.arrayElement(airportCodes)
+              arrivalAirport = faker.helpers.arrayElement(AIRPORTS_IATA_CODES)
             }
 
             const departureDate = faker.date.between({
@@ -75,8 +69,11 @@ export const datagenFlights = async (): Promise<void> => {
                 faker.number.float({ min: 0.3, max: 0.8 }),
             )
 
+            const flightNumber = flightNumbers.pop() as string
+            flightsNumber.push(flightNumber)
+
             return {
-              number: flightNumbers.pop() as string,
+              number: flightNumber,
               departure_date: departureDate,
               arrival_date: arrivalDate,
               departure_date_effective: departureDateEffective,
@@ -89,6 +86,40 @@ export const datagenFlights = async (): Promise<void> => {
           }),
         )
       })
+    },
+  })
+
+  await datagenEntity({
+    entity: "flight_employee",
+    handler: async () => {
+      return [
+        database.insertInto("flight_employee").values(
+          flightsNumber.flatMap((flightNumber) => {
+            const pilot = faker.helpers.arrayElement(PILOTS_IDS)
+            const copilot = faker.helpers.arrayElement(COPILOTS_IDS)
+            const cabinCrew = faker.helpers.arrayElements(CABIN_CREW_IDS, {
+              min: 2,
+              max: 5,
+            })
+            return [
+              {
+                flight_number: flightNumber,
+                employee_id: pilot,
+              },
+              {
+                flight_number: flightNumber,
+                employee_id: copilot,
+              },
+              ...cabinCrew.map((crewMember) => {
+                return {
+                  flight_number: flightNumber,
+                  employee_id: crewMember,
+                }
+              }),
+            ]
+          }),
+        ),
+      ]
     },
   })
 }

@@ -42,7 +42,7 @@ CREATE TABLE
 
 CREATE TABLE
   employee (
-    id SERIAL PRIMARY KEY,
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     first_name varchar(50) NOT NULL,
     last_name varchar(50) NOT NULL,
     job aviation_job NOT NULL,
@@ -74,9 +74,7 @@ CREATE TABLE
     brand airplane_brand NOT NULL,
     model VARCHAR(10) NOT NULL,
     fuel_capacity_liter INTEGER NOT NULL DEFAULT 0,
-    price_cents_euro BIGINT NOT NULL DEFAULT 0,
-    baggage_max_weight_kg INTEGER NOT NULL DEFAULT 0,
-    baggage_allowed_dimensions_cm2 INTEGER NOT NULL DEFAULT 0
+    price_cents_euro BIGINT NOT NULL DEFAULT 0
   );
 
 CREATE TABLE
@@ -105,8 +103,6 @@ CREATE TABLE
   ticket (
     code TEXT PRIMARY KEY,
     price_cents_euro INTEGER NOT NULL,
-    baggage_weight_kg DOUBLE PRECISION NOT NULL DEFAULT 0,
-    baggage_dimensions_cm2 DOUBLE PRECISION NOT NULL DEFAULT 0,
     passenger_id INTEGER NOT NULL REFERENCES passenger (id),
     reservation_number INTEGER NOT NULL REFERENCES reservation (number),
     seat_number VARCHAR(5) NOT NULL,
@@ -118,6 +114,6 @@ CREATE TABLE
 CREATE TABLE
   flight_employee (
     flight_number TEXT REFERENCES flight (number),
-    employee_id INTEGER REFERENCES employee (id),
+    employee_id UUID REFERENCES employee (id),
     PRIMARY KEY (flight_number, employee_id)
   );

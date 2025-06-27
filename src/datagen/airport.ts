@@ -3,6 +3,7 @@ import ky from "ky"
 import {
   AIRPORT_DB_API_TOKEN,
   AIRPORTS_DB_FILE,
+  DATA_FILES_DIRECTORY_PATH,
   shouldUseAirportDB,
 } from "../configuration.ts"
 import { database } from "../database.ts"
@@ -22,7 +23,7 @@ interface Airport {
   local_code: string
 }
 
-export const AIRPORTS_ICAO_CODE_TO_FETCH = [
+export const AIRPORTS_ICAO_CODES_TO_FETCH = [
   "LFPG",
   "LFPO",
   "LFMN",
@@ -47,6 +48,8 @@ export const AIRPORTS_ICAO_CODE_TO_FETCH = [
   "LFSB",
 ]
 
+export const AIRPORTS_IATA_CODES: string[] = []
+
 export const datagenAirport = async (): Promise<void> => {
   await datagenEntity({
     entity: "airport",
@@ -55,7 +58,7 @@ export const datagenAirport = async (): Promise<void> => {
 
       if (shouldUseAirportDB) {
         airports = await Promise.all(
-          AIRPORTS_ICAO_CODE_TO_FETCH.map(async (icaoCode) => {
+          AIRPORTS_ICAO_CODES_TO_FETCH.map(async (icaoCode) => {
             const airportsURL = new URL(
               `https://airportdb.io/api/v1/airport/${icaoCode}`,
             )
@@ -64,6 +67,7 @@ export const datagenAirport = async (): Promise<void> => {
             return json as Airport
           }),
         )
+        await fs.promises.mkdir(DATA_FILES_DIRECTORY_PATH, { recursive: true })
         await fs.promises.writeFile(
           AIRPORTS_DB_FILE,
           JSON.stringify(airports, null, 2),
@@ -81,6 +85,7 @@ export const datagenAirport = async (): Promise<void> => {
       return [
         database.insertInto("airport").values(
           airports.map((airport) => {
+            AIRPORTS_IATA_CODES.push(airport.iata_code)
             return {
               code_iata: airport.iata_code,
               code_icao: airport.icao_code,

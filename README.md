@@ -56,30 +56,61 @@ Aucune terminologie particulière n'est necessaire pour comprendre le projet.
 12. Le directeur, qui aimerait savoir, si les avions décolle et attérit à l'heure, ou si il y a des retards, afin de prendre des mesures pour améliorer la ponctualité des vols, et les prédictions de temps de vol.
 13. Un passager veut savoir la place qu'il occupe dans l'avion, et si il peut changer de place. => Un passager souhaite connaître les places disponibles dans l'avion et choisir celle qui lui convient, pour par exemple être à côté de sa famille.
 
-### La quantité de données (estimation)
+### La quantité de données
 
-- Nombre d'avion dans la compagnie: 45
+- Nombre d'avion dans la compagnie: 135
 - Nombre d'employés: 2 321 (496 pilotes, 668 personnels de cabine, 1 157 personnels au sol)
-- Nombre d'aéroports: 100
-- Nombre de vols par jour : 200
-- Nombre de passagers par jour: 36 000 (environ 180 passagers par vol), 100 000 enregistrés
+- Nombre d'aéroports: 22
+- Nombre de vols enregistrés : 1 000
+- Nombre de passagers enregistrés : 100 000
 
 ## Modèle Conceptuel de Données (MCD)
 
 ![MCD](./MCD.svg)
 
+### Relations
+
+- Airplane <-> Flight
+  - Un **avion** peut effectuer zéro ou plusieurs **vols** au cours de sa vie.
+  - Un **vol** est effectué par un et un seul **avion**.
+- Seat <-> Airplane
+  - Un **siège** appartient à un et un seul **avion**.
+  - Un **avion** est composé d'un ou plusieurs **sièges**.
+- Employee <-> Flight
+  - Un **employé** peut être affecté à zéro ou plusieurs **vols**.
+  - Un **vol** est effectué par un ou plusieurs **employés** (pilotes, hôtesses, etc.).
+- Passenger <-> Ticket
+  - Un **passager** peut posséder un ou plusieurs **billets** (pour plusieurs vols).
+  - Un **billet** est détenu par un et un seul **passager**.
+- Flight <-> Ticket
+  - Un **vol** est associé à zéro ou plusieurs **billets**.
+  - Un **billet** concerne un et un seul **vols**.
+- Reservation <-> Ticket
+  - Une **réservation** peut être associée à un ou plusieurs **billets**.
+  - Un **billet** est lié à une et une seule **réservation**.
+- Ticket <-> Seat
+  - Un **billet** correspond à un et un seul **siège**.
+  - Un **siège** peut être occupé par zéro ou un **billet**.
+- Flight <-> Airport
+  - Un **vol** part d'un et un seul **aéroport**.
+  - Un **vol** arrive à un et un seul **aéroport**.
+  - Un **aéroport** peut être le lieu de départ de zéro ou plusieurs vols.
+- Customer <-> Reservation
+  - Un **client** peut faire zéro ou plusieurs **réservations**.
+  - Une **réservation** est faite par un et un seul **client**.
+
 ## Modèle Logique de Données (MLD)
 
-- **passenger**(<u>id</u>, first_name, last_name)
+- **airplane**(<u>registration_number</u>, brand, model, fuel_capacity_liter, price_cents_euro)
+- **airport**(<u>code_iata</u>, code_icao, name, country, city, latitude, longitude)
 - **customer**(<u>email</u>, password)
 - **employee**(<u>id</u>, first_name, last_name, job, hire_date, salary_cents_euro)
-- **reservation**(<u>number</u>, date, #customer_email)
-- **ticket**(<u>code</u>, price_cents_euro, baggage_weight_kg, baggage_dimensions_cm2, #passenger_id, #reservation_number, #seat_number, #seat_airplane_registration_number, #flight_number)
 - **flight**(<u>number</u>, departure_date, arrival_date, arrival_date_effective, departure_date_effective, total_fuel_consumption_liter, #arrival_airport, #departure_airport, #airplane_number)
 - **flight_employee**(<u>#flight_number, #employee_id</u>)
-- **airport**(<u>code_iata</u>, code_icao, name, country, city, latitude, longitude)
+- **passenger**(<u>id</u>, first_name, last_name)
+- **reservation**(<u>number</u>, date, #customer_email)
 - **seat**(<u>number, #airplane_registration_number</u>)
-- **airplane**(<u>registration_number</u>, model, fuel_capacity, brand, price_cents_euro, baggage_max_weight_kg, baggage_allowed_dimensions_cm2)
+- **ticket**(<u>code</u>, price_cents_euro, #passenger_id, #reservation_number, #seat_number, #seat_airplane_registration_number, #flight_number)
 
 ### Légendes
 
@@ -87,3 +118,8 @@ Aucune terminologie particulière n'est necessaire pour comprendre le projet.
 - `#` : Clé étrangère
 
 ## Justification des choix de conception
+
+- Nous avons décidé de créer une table à part pour les sièges (`seat`) plutôt que de juste avoir un nombre de place dans l'avion afin de pouvoir gérer les places disponibles dans l'avion, et de pouvoir associer un siège à un billet. Aussi, nous avons fait le choix que chaque avion a ses propres sièges, ce qui permet de gérer les différences de configuration entre les avions. Même un avion de la même marque et du même modèle peut avoir une configuration différente, par exemple un Airbus A320 peut avoir 150 sièges dans une configuration, et 180 dans une autre.
+- Nous avons séparer passager et client, car on peut imaginer que le site de la compagnie permet de réserver des vols avec un compte (le client), et que les passagers, peuvent être sa famille, des amis (ou autre dans le cas de voyage d'affaire d'entreprise), etc.
+- Les informations des passagers peuvent être réutilisées pour d'autres réservations/vols, c'est pourquoi nous avons créé une table `passenger` séparée de la table `ticket`.
+- Nous avons la date de départ prévue et la date de départ effective, car il peut y avoir des retards, et nous avons besoin de savoir si le vol est parti à l'heure ou non. De même pour l'arrivée.

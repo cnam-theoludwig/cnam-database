@@ -26,12 +26,10 @@ class airport {
 
 class airplane {
   registration_number
-  model
-  fuel_capacity
   brand
+  model
+  fuel_capacity_liter
   price_cents_euro
-  baggage_max_weight_kg
-  baggage_allowed_dimensions_cm2
 }
 
 class employee {
@@ -52,8 +50,6 @@ class passenger {
 class ticket {
   code
   price_cents_euro
-  baggage_weight_kg
-  baggage_dimensions_cm2
 }
 
 class customer {
@@ -70,17 +66,20 @@ class reservation {
   date
 }
 
-airplane "1..1" ---- "0..n" flight : Fly
-seat "1..*" --- "1..1" airplane : Belongs
-employee "1..*" ---- "1..1" flight : Fly
-passenger "1..1" --- "1..*" ticket : Owns
-flight "0..*" -l- "1..*" ticket : Taken
-reservation "1..1" --- "1..*" ticket : Buy
-ticket "0..1" --- "1..1" seat : Belongs
+airplane "1..1" -l- "0..*" flight : "Fly"
+airplane "1..1" -- "1..*" seat : "Belongs"
 
-flight "1..1" -- "0..*" airport : Departure
-flight "1..1" -- "0..*" airport : Arrival
+flight "1..*" -- "0..*" employee : "Assigned to"
 
-customer "1..1" -- "0..*" reservation : Book
+flight "1..1" -- "0..*" airport : "Departs"
+flight "1..1" -- "0..*" airport : "Arrives"
+
+flight "1..1" -r- "0..*" ticket : "Belongs"
+
+ticket "1..1" -- "0..1" seat : "Takes"
+ticket "1..1" -- "1..1" passenger : "Owns"
+ticket "1..1" -- "1..1" reservation : "Buys"
+
+reservation "1..1" -- "0..*" customer : "Books"
 
 @enduml

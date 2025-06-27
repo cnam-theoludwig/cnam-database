@@ -62,6 +62,11 @@ const AIRPLANES_COUNT = Object.values(AIRPLANES).reduce((current, models) => {
   )
 }, 0)
 
+export const AIRPLANES_DATA: Array<{
+  registration_number: string
+  fuel_capacity_liter: number
+}> = []
+
 export const datagenAirplane = async (): Promise<void> => {
   await datagenEntity({
     entity: "airplane",
@@ -77,14 +82,22 @@ export const datagenAirplane = async (): Promise<void> => {
               return Array.from({ length: modelInfo.count }).map(() => {
                 const registrationNumber = registrationNumbers.pop() as string
                 modelInfo.registrationNumbers.push(registrationNumber)
+
+                const fuel_capacity_liter = faker.number.int({
+                  min: modelInfo.fuelCapacityLiter - 10_000,
+                  max: modelInfo.fuelCapacityLiter + 10_00,
+                })
+
+                AIRPLANES_DATA.push({
+                  registration_number: registrationNumber,
+                  fuel_capacity_liter,
+                })
+
                 return {
                   registration_number: registrationNumber,
                   brand: brand as keyof typeof AIRPLANES,
                   model,
-                  fuel_capacity_liter: faker.number.int({
-                    min: modelInfo.fuelCapacityLiter - 10_000,
-                    max: modelInfo.fuelCapacityLiter + 10_00,
-                  }),
+                  fuel_capacity_liter,
                   price_cents_euro: faker.number.int({
                     min: modelInfo.priceCentsEuro - 2_000_000,
                     max: modelInfo.priceCentsEuro + 2_000_000,

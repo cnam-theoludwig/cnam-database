@@ -5,3 +5,4 @@
 \i /sql/inserts/insert_customer.sql
 \i /sql/inserts/insert_airport.sql
 \i /sql/inserts/insert_flight.sql
+\i /sql/inserts/insert_flight_employee.sql

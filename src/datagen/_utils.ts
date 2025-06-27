@@ -89,12 +89,13 @@ PREPARE ${prepartedQueryName} AS
       await fs.promises.writeFile(sqlFile, sqlQueries + "\n", {
         encoding: "utf-8",
       })
+    } else {
+      await Promise.all(
+        insertQueries.map(async (query) => {
+          await query.executeTakeFirstOrThrow()
+        }),
+      )
     }
-    await Promise.all(
-      insertQueries.map(async (query) => {
-        await query.executeTakeFirstOrThrow()
-      }),
-    )
 
     const afterTimeMs = performance.now()
     const elapsedTimeMs = afterTimeMs - beforeTimeMs
