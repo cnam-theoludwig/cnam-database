@@ -66,19 +66,19 @@ class reservation {
   date
 }
 
-airplane "1..1" -l- "0..*" flight : "Fly"
-airplane "1..1" -- "1..*" seat : "Belongs"
+airplane "0..*" -l- "1..1" flight : "Fly"
+airplane "1..*" -- "1..1" seat : "Belongs"
 
 flight "1..*" -- "0..*" employee : "Assigned to"
 
 flight "1..1" -- "0..*" airport : "Departs"
 flight "1..1" -- "0..*" airport : "Arrives"
 
-flight "1..1" -r- "0..*" ticket : "Belongs"
+flight "0..*" -r- "1..1" ticket : "Belongs"
 
 ticket "1..1" -- "0..1" seat : "Takes"
-ticket "1..1" -- "1..1" passenger : "Owns"
-ticket "1..1" -- "1..1" reservation : "Buys"
+ticket "1..1" -- "1..*" passenger : "Owns"
+ticket "1..1" -- "1..*" reservation : "Buys"
 
 reservation "1..1" -- "0..*" customer : "Books"
 

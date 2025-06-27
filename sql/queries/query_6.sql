@@ -1,4 +1,4 @@
--- Scénario n°6: Classement des vols les plus remplis (avec le plus de passagers). => La compagnie demande a son responsable des ventes de faire un rapport sur l'occupation des petites lignes pour décider celles qu'il faudrait supprimer et identifier les vols atteignant systématiquement leur capacité maximale et planifie l'ajout d'appareils plus grands sur ces lignes.
+-- Scénario n°6: Classement des vols les plus remplis (avec le plus de passagers). => La compagnie demande à son responsable des ventes de faire un rapport sur l'occupation des petites lignes pour décider celles qu'il faudrait supprimer et identifier les vols atteignant systématiquement leur capacité maximale et planifie l'ajout d'appareils plus grands sur ces lignes.
 
 WITH
 -- 1. Compter les sièges occupés pour chaque numéro de vol

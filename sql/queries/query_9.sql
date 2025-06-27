@@ -41,9 +41,9 @@ SELECT
   fd.airplane_number,
   a.brand,
   a.model,
-  ROUND(
-    SUM(fd.distance_km)
-  ) AS total_distance_flown_km
+  ROUND(SUM(fd.distance_km)) AS total_distance_flown_km,
+  COUNT(*) AS total_flights, 
+  ROUND(AVG(fd.distance_km)) AS average_flight_distance_km
 FROM
   flight_distances AS fd
   JOIN airplane AS a ON fd.airplane_number = a.registration_number

@@ -1,4 +1,4 @@
--- Scénario n°4: Capacité moyenne des Airbus/Boeing, et la moyenne de consommation de kérozène par litre par heure, pour voir lequel consomme le plus. => Le responsable des ventes consulte la capacité moyenne des Airbus et des Boeing pour savoir si les avions sont rentables, et ajuster les destinations des vols.
+-- Scénario n°4: Capacité moyenne des Airbus/Boeing, et la moyenne de consommation de kérozène en litre par heure, pour voir lequel consomme le plus. => Le responsable des ventes consulte la capacité moyenne des Airbus et des Boeing pour savoir si les avions sont rentables, et ajuster les destinations des vols.
 
 WITH
 -- 1. Calculer la capacité moyenne en sièges pour chaque marque
